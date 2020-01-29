@@ -1,0 +1,94 @@
+
+==================== FINAL INTERFACE ====================
+2020-01-20 16:07:36.338483597 UTC
+
+interface turtle-graphics-0.1.0.0-edlsCigmhi95bBwzfkaIg:Turtle 8022
+  interface hash: eea0afd3dc2d3efa969803c709c90aa4
+  ABI hash: 92658b1ad562c072ec1384fb39189b1f
+  export-list hash: 25f7c10f35d2fe85fa88554bc74df1b7
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: aff0eaadb42bcc6882e9e879c70ab79c
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  Turtle.Program
+module dependencies:
+package dependencies: base-4.10.1.0* ghc-prim-0.5.1.1
+                      integer-gmp-1.0.1.0
+orphans: base-4.10.1.0:GHC.Float base-4.10.1.0:GHC.Base
+family instance modules: base-4.10.1.0:Control.Applicative
+                         base-4.10.1.0:Data.Either base-4.10.1.0:Data.Functor.Const
+                         base-4.10.1.0:Data.Functor.Identity base-4.10.1.0:Data.Monoid
+                         base-4.10.1.0:Data.Type.Equality base-4.10.1.0:GHC.Generics
+                         base-4.10.1.0:GHC.IO.Exception base-4.10.1.0:GHC.TypeLits
+                         base-4.10.1.0:GHC.TypeNats
+import  -/  base-4.10.1.0:Prelude 31945b7d0084063347fc52506d3a4020
+74ba2f7f1956b5f9b9578bd5044f217d
+  $tc'YourProgramType :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   10500831454719791333##
+                   6455859652998015251##
+                   Turtle.$trModule
+                   Turtle.$tc'YourProgramType2
+                   0#
+                   Turtle.$tc'YourProgramType1) -}
+e4e8c9cc327d627e677762631943339a
+  $tc'YourProgramType1 :: GHC.Types.KindRep
+  {- HasNoCafRefs, Strictness: m1, Inline: [~] -}
+393041594cece19d6b9cdf6d879c4a6e
+  $tc'YourProgramType2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Turtle.$tc'YourProgramType3) -}
+0de641c49359783c6dfa0831f95fc9ec
+  $tc'YourProgramType3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'YourProgramType"#) -}
+f86cff4039fd0ea358c4d70efb625295
+  $tcProgram :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   9436908598736240662##
+                   1395574339636219182##
+                   Turtle.$trModule
+                   Turtle.$tcProgram1
+                   0#
+                   GHC.Types.krep$*) -}
+2ea04818e44212a01419bf614bcac346
+  $tcProgram1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Turtle.$tcProgram2) -}
+a0369c1d15c9f5fea7ee51fa2ef8089e
+  $tcProgram2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Program"#) -}
+212b44ad453504def648ee043265c935
+  $trModule :: GHC.Types.Module
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.Module
+                   Turtle.$trModule3
+                   Turtle.$trModule1) -}
+775c7d77aba6bb002a6a1ae619221bd1
+  $trModule1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Turtle.$trModule2) -}
+c24d0ac400ac138024fcdbad2c7b207e
+  $trModule2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Turtle"#) -}
+beb71452675d97327bb739fb1dfab13b
+  $trModule3 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Turtle.$trModule4) -}
+b26c3c6ec5aa479176c1d501cf653471
+  $trModule4 :: GHC.Prim.Addr#
+  {- HasNoCafRefs,
+     Unfolding: ("turtle-graphics-0.1.0.0-edlsCigmhi95bBwzfkaIg"#) -}
+b3b5e96b1d0e2743ea42cef5b3c2932c
+  data Program = YourProgramType
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+

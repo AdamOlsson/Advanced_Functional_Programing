@@ -1,0 +1,241 @@
+Configuring HGL-3.2.3.1...
+Preprocessing library for HGL-3.2.3.1..
+Building library for HGL-3.2.3.1..
+[ 1 of 27] Compiling Graphics.HGL.Internals.Flag ( Graphics/HGL/Internals/Flag.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Internals/Flag.o )
+
+[;1mGraphics/HGL/Internals/Flag.hs:17:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in three further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m17 |[0m[0m [;1m[35m        [0m[0m( Flag, newFlag, setFlag, resetFlag
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[ 2 of 27] Compiling Graphics.HGL.Internals.Types ( Graphics/HGL/Internals/Types.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Internals/Types.o )
+
+[;1mGraphics/HGL/Internals/Types.hs:63:9: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in 26 further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m63 |[0m[0m   | Dash[;1m[35m        [0m[0m-- "-------"
+[;1m[34m   |[0m[0m[;1m[35m         ^^^^^^^^[0m[0m
+[0m[0m[0m[ 3 of 27] Compiling Graphics.HGL.Internals.Utilities ( Graphics/HGL/Internals/Utilities.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Internals/Utilities.o )
+
+[;1mGraphics/HGL/Internals/Utilities.hs:17:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in three further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m17 |[0m[0m [;1m[35m        [0m[0mbracket, bracket_,
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[ 4 of 27] Compiling Graphics.HGL.Units ( Graphics/HGL/Units.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Units.o )
+
+[;1mGraphics/HGL/Units.hs:16:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in four further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m16 |[0m[0m [;1m[35m        [0m[0m( Point
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[ 5 of 27] Compiling Graphics.HGL.X11.Display ( Graphics/HGL/X11/Display.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/X11/Display.o )
+
+[;1mGraphics/HGL/X11/Display.hs:3:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in four further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m  |[0m[0m
+[;1m[34m3 |[0m[0m [;1m[35m        [0m[0m( getDisplayName
+[;1m[34m  |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[ 6 of 27] Compiling Graphics.HGL.X11.Timer ( Graphics/HGL/X11/Timer.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/X11/Timer.o )
+
+[;1mGraphics/HGL/X11/Timer.hs:17:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in two further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m17 |[0m[0m [;1m[35m        [0m[0m( Timer, new, stop
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[ 7 of 27] Compiling Graphics.HGL.X11.Types ( Graphics/HGL/X11/Types.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/X11/Types.o )
+
+[;1mGraphics/HGL/X11/Types.hs:17:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in 7 further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m17 |[0m[0m [;1m[35m        [0m[0m( DC(..)
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[ 8 of 27] Compiling Graphics.HGL.Key ( Graphics/HGL/Key.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Key.o )
+
+[;1mGraphics/HGL/Key.hs:16:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in 79 further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m16 |[0m[0m [;1m[35m        [0m[0m( Key                   -- Abstract!
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[ 9 of 27] Compiling Graphics.HGL.Internals.Event ( Graphics/HGL/Internals/Event.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Internals/Event.o )
+
+[;1mGraphics/HGL/Internals/Event.hs:17:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in 39 further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m17 |[0m[0m [;1m[35m        [0m[0m( Event(..)
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[10 of 27] Compiling Graphics.HGL.Internals.Events ( Graphics/HGL/Internals/Events.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Internals/Events.o )
+
+[;1mGraphics/HGL/Internals/Events.hs:17:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in one further location.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m17 |[0m[0m [;1m[35m        [0m[0mEvents, newEvents, getEvent, sendEvent, isNoEvent,
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m
+[;1mGraphics/HGL/Internals/Events.hs:61:17: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wdeprecations[0m[0m[;1m][0m[0m[;1m
+    In the use of ‘isEmptyChan’
+    (imported from Control.Concurrent.Chan):
+    Deprecated: "if you need this operation, use Control.Concurrent.STM.TChan instead.  See <http://ghc.haskell.org/trac/ghc/ticket/4154> for details"[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m61 |[0m[0m isNoEvent evs = [;1m[35misEmptyChan[0m[0m (events evs)
+[;1m[34m   |[0m[0m[;1m[35m                 ^^^^^^^^^^^[0m[0m
+[0m[0m[0m[11 of 27] Compiling Graphics.HGL.Internals.Draw ( Graphics/HGL/Internals/Draw.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Internals/Draw.o )
+
+[;1mGraphics/HGL/Internals/Draw.hs:17:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in 34 further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m17 |[0m[0m [;1m[35m        [0m[0m( Graphic       -- = Draw ()
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[12 of 27] Compiling Graphics.HGL.X11.DC ( Graphics/HGL/X11/DC.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/X11/DC.o )
+
+[;1mGraphics/HGL/X11/DC.hs:17:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in 22 further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m17 |[0m[0m [;1m[35m        [0m[0m( drawUnbuffered, drawBuffered, erase
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[13 of 27] Compiling Graphics.HGL.Draw.Monad ( Graphics/HGL/Draw/Monad.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Draw/Monad.o )
+
+[;1mGraphics/HGL/Draw/Monad.hs:16:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in 9 further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m16 |[0m[0m [;1m[35m        [0m[0m( Graphic       -- = Draw ()
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[14 of 27] Compiling Graphics.HGL.Draw.Text ( Graphics/HGL/Draw/Text.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Draw/Text.o )
+
+[;1mGraphics/HGL/Draw/Text.hs:17:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in 23 further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m17 |[0m[0m [;1m[35m        [0m[0m-- * Drawing text
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[15 of 27] Compiling Graphics.HGL.Draw.Region ( Graphics/HGL/Draw/Region.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Draw/Region.o )
+
+[;1mGraphics/HGL/Draw/Region.hs:16:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in 28 further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m16 |[0m[0m [;1m[35m        [0m[0m( Region
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m
+[;1mGraphics/HGL/Draw/Region.hs:147:62: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Woverflowed-literals[0m[0m[;1m][0m[0m[;1m
+    Literal -1 is out of the GHC.Word.Word32 range 0..4294967295[0m[0m
+[;1m[34m    |[0m[0m
+[;1m[34m147 |[0m[0m   X.fillRectangle (disp dc) (drawable dc) (brushGC dc) 0 0 (-[;1m[35m1[0m[0m) (-1)  -- entire window (in 2s complement!)
+[;1m[34m    |[0m[0m[;1m[35m                                                              ^[0m[0m
+[0m[0m[0m
+[;1mGraphics/HGL/Draw/Region.hs:147:67: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Woverflowed-literals[0m[0m[;1m][0m[0m[;1m
+    Literal -1 is out of the GHC.Word.Word32 range 0..4294967295[0m[0m
+[;1m[34m    |[0m[0m
+[;1m[34m147 |[0m[0m   X.fillRectangle (disp dc) (drawable dc) (brushGC dc) 0 0 (-1) (-[;1m[35m1[0m[0m)  -- entire window (in 2s complement!)
+[;1m[34m    |[0m[0m[;1m[35m                                                                   ^[0m[0m
+[0m[0m[0m[16 of 27] Compiling Graphics.HGL.Draw.Picture ( Graphics/HGL/Draw/Picture.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Draw/Picture.o )
+
+[;1mGraphics/HGL/Draw/Picture.hs:16:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in 22 further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m16 |[0m[0m [;1m[35m        [0m[0m( arc, ellipse, shearEllipse
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[17 of 27] Compiling Graphics.HGL.Draw.Pen ( Graphics/HGL/Draw/Pen.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Draw/Pen.o )
+
+[;1mGraphics/HGL/Draw/Pen.hs:25:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in 10 further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m25 |[0m[0m [;1m[35m        [0m[0m( Pen
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[18 of 27] Compiling Graphics.HGL.Draw.Font ( Graphics/HGL/Draw/Font.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Draw/Font.o )
+
+[;1mGraphics/HGL/Draw/Font.hs:26:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in 36 further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m26 |[0m[0m [;1m[35m        [0m[0m( Font
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[19 of 27] Compiling Graphics.HGL.Draw.Brush ( Graphics/HGL/Draw/Brush.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Draw/Brush.o )
+
+[;1mGraphics/HGL/Draw/Brush.hs:16:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in 7 further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m16 |[0m[0m [;1m[35m        [0m[0m( Brush
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[20 of 27] Compiling Graphics.HGL.Draw ( Graphics/HGL/Draw.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Draw.o )
+
+[;1mGraphics/HGL/Draw.hs:16:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in 16 further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m16 |[0m[0m [;1m[35m        [0m[0m(
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[21 of 27] Compiling Graphics.HGL.X11.Window ( Graphics/HGL/X11/Window.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/X11/Window.o )
+
+[;1mGraphics/HGL/X11/Window.hs:18:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in 98 further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m18 |[0m[0m [;1m[35m        [0m[0m( runGraphicsEx         -- :: String -> IO () -> IO ()
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[22 of 27] Compiling Graphics.HGL.Window ( Graphics/HGL/Window.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Window.o )
+
+[;1mGraphics/HGL/Window.hs:16:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in 68 further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m16 |[0m[0m [;1m[35m        [0m[0m(
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[23 of 27] Compiling Graphics.HGL.Run ( Graphics/HGL/Run.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Run.o )
+
+[;1mGraphics/HGL/Run.hs:16:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in three further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m16 |[0m[0m [;1m[35m        [0m[0m( runGraphics           -- :: IO () -> IO ()
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[24 of 27] Compiling Graphics.HGL.Core ( Graphics/HGL/Core.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Core.o )
+
+[;1mGraphics/HGL/Core.hs:16:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in five further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m16 |[0m[0m [;1m[35m        [0m[0m( module Graphics.HGL.Units
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[25 of 27] Compiling Graphics.HGL.Utils ( Graphics/HGL/Utils.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL/Utils.o )
+
+[;1mGraphics/HGL/Utils.hs:17:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in 106 further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m17 |[0m[0m [;1m[35m        [0m[0m-- * Windows
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[26 of 27] Compiling Graphics.HGL     ( Graphics/HGL.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/HGL.o )
+
+[;1mGraphics/HGL.hs:17:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in six further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m17 |[0m[0m [;1m[35m        [0m[0m  -- $intro
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0m[27 of 27] Compiling Graphics.SOE     ( Graphics/SOE.hs, .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.0.1.0/build/Graphics/SOE.o )
+
+[;1mGraphics/SOE.hs:26:1: [;1m[35mwarning:[0m[0m[;1m [[;1m[35m-Wtabs[0m[0m[;1m][0m[0m[;1m
+    Tab character found here, and in 173 further locations.
+    Please use spaces instead.[0m[0m
+[;1m[34m   |[0m[0m
+[;1m[34m26 |[0m[0m [;1m[35m        [0m[0m(
+[;1m[34m   |[0m[0m[;1m[35m ^^^^^^^^[0m[0m
+[0m[0m[0mInstalling library in /home/adam/Documents/school/advanced_func_prog/assignment1/turtle-graphics-0.1.0.0/.stack-work/install/x86_64-linux-tinfo6/lts-10.4/8.2.2/lib/x86_64-linux-ghc-8.2.2/HGL-3.2.3.1-HRu2sFsLvfI7xaDv1NrWGl
+Registering library for HGL-3.2.3.1..

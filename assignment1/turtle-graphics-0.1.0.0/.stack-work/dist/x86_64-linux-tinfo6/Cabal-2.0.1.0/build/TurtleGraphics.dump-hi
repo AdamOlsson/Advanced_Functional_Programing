@@ -1,0 +1,539 @@
+
+==================== FINAL INTERFACE ====================
+2020-01-20 16:07:36.49821886 UTC
+
+interface turtle-graphics-0.1.0.0-edlsCigmhi95bBwzfkaIg:TurtleGraphics 8022
+  interface hash: 1a180b7b1c9c74b499c9689a549e77c0
+  ABI hash: 3a906759e428c419416a27aa32cdc482
+  export-list hash: 60074fcae89c3d2f4add78380c2e6f82
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: aff0eaadb42bcc6882e9e879c70ab79c
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  TurtleGraphics.runGraphical
+module dependencies: Turtle
+package dependencies: HGL-3.2.3.1 X11-1.8 array-0.5.2.0
+                      base-4.10.1.0 containers-0.5.10.2 data-default-0.7.1.1
+                      data-default-class-0.1.2.0 data-default-instances-containers-0.0.1
+                      data-default-instances-dlist-0.0.1
+                      data-default-instances-old-locale-0.0.1 deepseq-1.4.3.0
+                      dlist-0.8.0.4 ghc-prim-0.5.1.1 integer-gmp-1.0.1.0
+                      old-locale-1.0.0.7
+orphans: data-default-instances-containers-0.0.1:Data.Default.Instances.Containers
+         data-default-instances-dlist-0.0.1:Data.Default.Instances.DList
+         data-default-instances-old-locale-0.0.1:Data.Default.Instances.OldLocale
+         base-4.10.1.0:GHC.Float base-4.10.1.0:GHC.Base
+family instance modules: base-4.10.1.0:Control.Applicative
+                         base-4.10.1.0:Data.Complex base-4.10.1.0:Data.Either
+                         base-4.10.1.0:Data.Functor.Compose base-4.10.1.0:Data.Functor.Const
+                         base-4.10.1.0:Data.Functor.Identity
+                         base-4.10.1.0:Data.Functor.Product base-4.10.1.0:Data.Functor.Sum
+                         base-4.10.1.0:Data.List.NonEmpty base-4.10.1.0:Data.Monoid
+                         base-4.10.1.0:Data.Semigroup base-4.10.1.0:Data.Type.Equality
+                         base-4.10.1.0:Data.Version base-4.10.1.0:Data.Void
+                         base-4.10.1.0:GHC.Exts base-4.10.1.0:GHC.Generics
+                         base-4.10.1.0:GHC.IO.Exception base-4.10.1.0:GHC.TypeLits
+                         base-4.10.1.0:GHC.TypeNats containers-0.5.10.2:Data.IntMap.Internal
+                         containers-0.5.10.2:Data.IntSet.Internal
+                         containers-0.5.10.2:Data.Map.Internal
+                         containers-0.5.10.2:Data.Sequence.Internal
+                         containers-0.5.10.2:Data.Set.Internal containers-0.5.10.2:Data.Tree
+                         dlist-0.8.0.4:Data.DList
+import  -/  HGL-3.2.3.1:Graphics.HGL c056c87cd979e8d758d7d6a86b549578
+import  -/  HGL-3.2.3.1:Graphics.HGL.Draw.Picture 5843ad9e2af7886ed0ac3f42c17e400b
+import  -/  HGL-3.2.3.1:Graphics.HGL.Internals.Draw 145cfbe509a7f30fd7e4f7d2ccb4967e
+import  -/  HGL-3.2.3.1:Graphics.HGL.Internals.Types 05d942ff8d9aec4c71d803808c2013d3
+import  -/  HGL-3.2.3.1:Graphics.HGL.Run 894e87c73a25ed660cebe66601a7f600
+import  -/  HGL-3.2.3.1:Graphics.HGL.Utils dd3c5938ffcf917264e8676c66ee2f2d
+import  -/  HGL-3.2.3.1:Graphics.HGL.Window 9d20755e502f6bdd5aa9536bddfa847e
+import  -/  HGL-3.2.3.1:Graphics.HGL.X11.Window 9e029bc7326d11bc73f1bdf756ce5081
+import  -/  base-4.10.1.0:GHC.Base 782fd99b5e36f3698a26179a49afca64
+import  -/  base-4.10.1.0:Prelude 31945b7d0084063347fc52506d3a4020
+import  -/  ghc-prim-0.5.1.1:GHC.Types b1fd0716441595db508c1a74387bf394
+import  -/  Turtle 92658b1ad562c072ec1384fb39189b1f
+  exports: 25f7c10f35d2fe85fa88554bc74df1b7
+  Program b3b5e96b1d0e2743ea42cef5b3c2932c
+3e273ab9777a2747c57c5eaf7f33ccfe
+  $trModule :: GHC.Types.Module
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.Module
+                   TurtleGraphics.$trModule3
+                   TurtleGraphics.$trModule1) -}
+49b339e4a4f48c52be4b8fbac2ee836a
+  $trModule1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS TurtleGraphics.$trModule2) -}
+6dbe530c76e3c6212ecfca870a8b123d
+  $trModule2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("TurtleGraphics"#) -}
+d43eb42be27c8c1b980776d7374e3572
+  $trModule3 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS TurtleGraphics.$trModule4) -}
+8f3889253ec344c8f8f401736d041cd1
+  $trModule4 :: GHC.Prim.Addr#
+  {- HasNoCafRefs,
+     Unfolding: ("turtle-graphics-0.1.0.0-edlsCigmhi95bBwzfkaIg"#) -}
+e41878ae2ef42a78a5a4d10f99c2f44f
+  runGraphical :: Turtle.Program -> GHC.Types.IO ()
+  {- Arity: 2, Strictness: <L,A><S,U>,
+     Unfolding: InlineRule (0, True, True)
+                TurtleGraphics.runGraphical1
+                  `cast`
+                (<Turtle.Program>_R ->_R Sym (GHC.Types.N:IO[0] <()>_R)) -}
+f7b65663b86e17333c306122c9da41aa
+  runGraphical1 ::
+    Turtle.Program
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 2, Strictness: <L,A><S,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (p :: Turtle.Program)
+                   (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case GHC.Prim.catch#
+                        @ (Data.Either.Either GHC.IO.Exception.IOError GHC.Base.String)
+                        @ GHC.Exception.SomeException
+                        Graphics.HGL.X11.Display.getDisplayName3
+                        (System.IO.Error.tryIOError2 @ GHC.Base.String)
+                        s of ds1 { (#,#) ipv ipv1 ->
+                 Graphics.HGL.X11.Window.runGraphicsEx1
+                   (case ipv1 of wild {
+                      Data.Either.Left x -> Graphics.HGL.Run.runGraphics2
+                      Data.Either.Right y -> y })
+                   TurtleGraphics.runGraphical2
+                     `cast`
+                   (Sym (GHC.Types.N:IO[0] <()>_R))
+                   ipv }) -}
+5b193026381fc847c6a0288586aed9da
+  runGraphical10 ::
+    Graphics.HGL.X11.Types.DC
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(S(S)S(S)LS(S)LLL),1*U(1*U(U),1*U(U),A,1*U(U),A,A,A)><S,U>,
+     Unfolding: (\ (w2 :: Graphics.HGL.X11.Types.DC)
+                   (w3 :: GHC.Prim.State# GHC.Prim.RealWorld)[OneShot] ->
+                 case w2 of ww14 { Graphics.HGL.X11.Types.MkDC ww15 ww16 ww17 ww18 ww19 ww20 ww21 ->
+                 case ww15
+                        `cast`
+                      (Graphics.X11.Xlib.Types.N:Display[0]) of ww22 { GHC.Ptr.Ptr ww23 ->
+                 case ww16 of ww24 { GHC.Word.W64# ww25 ->
+                 case ww18
+                        `cast`
+                      (Graphics.X11.Xlib.Types.N:GC[0]) of ww26 { GHC.Ptr.Ptr ww27 ->
+                 case {__pkg_ccall X11-1.8 GHC.Prim.Addr#
+                                           -> GHC.Prim.Word#
+                                           -> GHC.Prim.Addr#
+                                           -> GHC.Prim.Int#
+                                           -> GHC.Prim.Int#
+                                           -> GHC.Prim.Int#
+                                           -> GHC.Prim.Int#
+                                           -> GHC.Prim.State# GHC.Prim.RealWorld
+                                           -> (# GHC.Prim.State# GHC.Prim.RealWorld #)}
+                        ww23
+                        ww25
+                        ww27
+                        150#
+                        100#
+                        150#
+                        200#
+                        w3 of wild { Unit# ds22 ->
+                 (# ds22, GHC.Tuple.() #) } } } } }) -}
+dbd44e8a116e3e073ef90006e81ffae7
+  runGraphical11 ::
+    Graphics.HGL.X11.Types.DC
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Unfolding: (Graphics.HGL.Utils.withColor1
+                   Graphics.HGL.Utils.Green
+                   TurtleGraphics.runGraphical12
+                     `cast`
+                   (Trans
+                        (<Graphics.HGL.X11.Types.DC>_R ->_R Sym (GHC.Types.N:IO[0] <()>_R))
+                        (Sym (Graphics.HGL.Internals.Draw.N:Draw[0] <()>_R)))) -}
+841ecf898015e5306c6b6a9496506b40
+  runGraphical12 ::
+    Graphics.HGL.X11.Types.DC
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(S(S)S(S)LS(S)LLL),1*U(1*U(U),1*U(U),A,1*U(U),A,A,A)><S,U>,
+     Unfolding: (\ (w2 :: Graphics.HGL.X11.Types.DC)
+                   (w3 :: GHC.Prim.State# GHC.Prim.RealWorld)[OneShot] ->
+                 case w2 of ww14 { Graphics.HGL.X11.Types.MkDC ww15 ww16 ww17 ww18 ww19 ww20 ww21 ->
+                 case ww15
+                        `cast`
+                      (Graphics.X11.Xlib.Types.N:Display[0]) of ww22 { GHC.Ptr.Ptr ww23 ->
+                 case ww16 of ww24 { GHC.Word.W64# ww25 ->
+                 case ww18
+                        `cast`
+                      (Graphics.X11.Xlib.Types.N:GC[0]) of ww26 { GHC.Ptr.Ptr ww27 ->
+                 case {__pkg_ccall X11-1.8 GHC.Prim.Addr#
+                                           -> GHC.Prim.Word#
+                                           -> GHC.Prim.Addr#
+                                           -> GHC.Prim.Int#
+                                           -> GHC.Prim.Int#
+                                           -> GHC.Prim.Int#
+                                           -> GHC.Prim.Int#
+                                           -> GHC.Prim.State# GHC.Prim.RealWorld
+                                           -> (# GHC.Prim.State# GHC.Prim.RealWorld #)}
+                        ww23
+                        ww25
+                        ww27
+                        100#
+                        100#
+                        200#
+                        200#
+                        w3 of wild { Unit# ds22 ->
+                 (# ds22, GHC.Tuple.() #) } } } } }) -}
+89154ae58fa94910accc6f986939fc64
+  runGraphical13 ::
+    Graphics.HGL.X11.Types.DC
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Unfolding: (Graphics.HGL.Utils.withColor1
+                   Graphics.HGL.Utils.Red
+                   TurtleGraphics.runGraphical14
+                     `cast`
+                   (Trans
+                        (<Graphics.HGL.X11.Types.DC>_R ->_R Sym (GHC.Types.N:IO[0] <()>_R))
+                        (Sym (Graphics.HGL.Internals.Draw.N:Draw[0] <()>_R)))) -}
+3bdc17e40a06317e4f995e81e64c10db
+  runGraphical14 ::
+    Graphics.HGL.X11.Types.DC
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(S(S)S(S)LS(S)LLL),1*U(1*U(U),1*U(U),A,1*U(U),A,A,A)><S,U>,
+     Unfolding: (\ (w2 :: Graphics.HGL.X11.Types.DC)
+                   (w3 :: GHC.Prim.State# GHC.Prim.RealWorld)[OneShot] ->
+                 case w2 of ww14 { Graphics.HGL.X11.Types.MkDC ww15 ww16 ww17 ww18 ww19 ww20 ww21 ->
+                 case ww15
+                        `cast`
+                      (Graphics.X11.Xlib.Types.N:Display[0]) of ww22 { GHC.Ptr.Ptr ww23 ->
+                 case ww16 of ww24 { GHC.Word.W64# ww25 ->
+                 case ww18
+                        `cast`
+                      (Graphics.X11.Xlib.Types.N:GC[0]) of ww26 { GHC.Ptr.Ptr ww27 ->
+                 case {__pkg_ccall X11-1.8 GHC.Prim.Addr#
+                                           -> GHC.Prim.Word#
+                                           -> GHC.Prim.Addr#
+                                           -> GHC.Prim.Int#
+                                           -> GHC.Prim.Int#
+                                           -> GHC.Prim.Int#
+                                           -> GHC.Prim.Int#
+                                           -> GHC.Prim.State# GHC.Prim.RealWorld
+                                           -> (# GHC.Prim.State# GHC.Prim.RealWorld #)}
+                        ww23
+                        ww25
+                        ww27
+                        100#
+                        200#
+                        200#
+                        100#
+                        w3 of wild { Unit# ds22 ->
+                 (# ds22, GHC.Tuple.() #) } } } } }) -}
+9db5aa38fe7088cefcb168aa7c32a839
+  runGraphical15 ::
+    Graphics.HGL.X11.Window.Window
+    -> [Graphics.HGL.Internals.Draw.Graphic]
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <L,1*U(A,U(U),U(U),U(A,U(U)),U(U),A,A)><S,1*U><S,U> -}
+f9fe45d1d8c0a6e414e9cdf9efc94d35
+  runGraphical16 :: [Graphics.X11.Xlib.Types.Point]
+  {- Unfolding: (GHC.Base.map
+                   @ (GHC.Types.Int, GHC.Types.Int)
+                   @ Graphics.X11.Xlib.Types.Point
+                   Graphics.HGL.X11.Types.fromPoint
+                   TurtleGraphics.runGraphical_w) -}
+f2aa9a519cda2a438c29630a004c4af7
+  runGraphical17 :: [Graphics.HGL.Internals.Types.Point]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Graphics.HGL.Internals.Types.Point
+                   TurtleGraphics.runGraphical24
+                   TurtleGraphics.runGraphical18) -}
+b1d8c0d6b665a97a11908ff2180b5bd0
+  runGraphical18 :: [Graphics.HGL.Internals.Types.Point]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Graphics.HGL.Internals.Types.Point
+                   TurtleGraphics.runGraphical23
+                   TurtleGraphics.runGraphical19) -}
+ef0f6fa27d46cab631d1f67b5c02a423
+  runGraphical19 :: [Graphics.HGL.Internals.Types.Point]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Graphics.HGL.Internals.Types.Point
+                   TurtleGraphics.runGraphical20
+                   (GHC.Types.[] @ Graphics.HGL.Internals.Types.Point)) -}
+c7324bb6ae7ac7d1a2efc9360ecb805a
+  runGraphical2 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case Graphics.HGL.X11.Window.openWindowEx1
+                        TurtleGraphics.runGraphical28
+                        (GHC.Base.Nothing @ Graphics.HGL.Internals.Types.Point)
+                        TurtleGraphics.runGraphical23
+                        Graphics.HGL.Internals.Types.DoubleBuffered
+                        TurtleGraphics.runGraphical26
+                        s of ds1 { (#,#) ipv ipv1 ->
+                 case ipv1 of ww { Graphics.HGL.X11.Window.MkWindow ww1 ww2 ww3 ww4 ww5 ww6 ww7 ->
+                 case ww2 of ww8 { GHC.MVar.MVar ww9 ->
+                 case ww3
+                        `cast`
+                      (GHC.IORef.N:IORef[0] <GHC.Types.Bool>_N) of ww10 { GHC.STRef.STRef ww11 ->
+                 case ww5 of ww12 { GHC.MVar.MVar ww13 ->
+                 case GHC.Prim.takeMVar#
+                        @ GHC.Prim.RealWorld
+                        @ Graphics.HGL.Internals.Draw.Graphic
+                        ww13
+                        ipv of ds11 { (#,#) ipv2 ipv3 ->
+                 case GHC.Prim.putMVar#
+                        @ GHC.Prim.RealWorld
+                        @ Graphics.HGL.Internals.Draw.Graphic
+                        ww13
+                        (\ (dc :: Graphics.HGL.X11.Types.DC)
+                           (s1 :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                         case (ipv3 `cast` (Graphics.HGL.Internals.Draw.N:Draw[0] <()>_R)
+                                 dc)
+                                `cast`
+                              (GHC.Types.N:IO[0] <()>_R)
+                                s1 of ds2 { (#,#) ipv4 ipv5 ->
+                         case dc of ww16 { Graphics.HGL.X11.Types.MkDC ww17 ww18 ww19 ww20 ww21 ww22 ww23 ->
+                         case ww17
+                                `cast`
+                              (Graphics.X11.Xlib.Types.N:Display[0]) of ww24 { GHC.Ptr.Ptr ww25 ->
+                         case ww18 of ww26 { GHC.Word.W64# ww27 ->
+                         case ww21
+                                `cast`
+                              (Graphics.X11.Xlib.Types.N:GC[0]) of ww28 { GHC.Ptr.Ptr ww29 ->
+                         Graphics.X11.Xlib.Misc.$wfillPolygon
+                           ww25
+                           ww27
+                           ww29
+                           TurtleGraphics.runGraphical16
+                           0#
+                           0#
+                           ipv4 } } } } })
+                          `cast`
+                        (Trans
+                             (<Graphics.HGL.X11.Types.DC>_R ->_R Sym (GHC.Types.N:IO[0] <()>_R))
+                             (Sym (Graphics.HGL.Internals.Draw.N:Draw[0] <()>_R)))
+                        ipv2 of s2# { DEFAULT ->
+                 case GHC.Prim.readMVar#
+                        @ GHC.Prim.RealWorld
+                        @ (GHC.Base.Maybe Graphics.HGL.X11.Types.DC)
+                        ww9
+                        s2# of ds2 { (#,#) ipv4 ipv5 ->
+                 case GHC.Prim.readMutVar#
+                        @ GHC.Prim.RealWorld
+                        @ GHC.Types.Bool
+                        ww11
+                        ipv4 of ds3 { (#,#) ipv6 ipv7 ->
+                 let {
+                   $w$j :: GHC.Prim.State# GHC.Prim.RealWorld
+                           -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+                     <join 1> {- Arity: 1, Strictness: <S,U>, Inline: [0] -}
+                   = \ (w :: GHC.Prim.State# GHC.Prim.RealWorld)[OneShot] ->
+                     case TurtleGraphics.runGraphical15
+                            ww
+                            TurtleGraphics.runGraphical3
+                            w of ds4 { (#,#) ipv8 ipv9 ->
+                     case ww4 of ww16 { Graphics.HGL.Internals.Events.Events ww17 ww18 ->
+                     case ww17 of ww19 { Control.Concurrent.Chan.Chan ww20 ww21 ->
+                     case Graphics.HGL.Utils.$wgetKey
+                            ww20
+                            ww21
+                            ipv8 of ds5 { (#,#) ipv10 ipv11 ->
+                     (# ipv10, GHC.Tuple.() #) } } } }
+                 } in
+                 case ipv7 of wild {
+                   GHC.Types.False -> $w$j ipv6
+                   GHC.Types.True
+                   -> case ipv5 of wild1 {
+                        GHC.Base.Nothing -> $w$j ipv6
+                        GHC.Base.Just dc
+                        -> case dc of ww16 { Graphics.HGL.X11.Types.MkDC ww17 ww18 ww19 ww20 ww21 ww22 ww23 ->
+                           case ww17
+                                  `cast`
+                                (Graphics.X11.Xlib.Types.N:Display[0]) of ww24 { GHC.Ptr.Ptr ww25 ->
+                           case ww18 of ww26 { GHC.Word.W64# ww27 ->
+                           case ww21
+                                  `cast`
+                                (Graphics.X11.Xlib.Types.N:GC[0]) of ww28 { GHC.Ptr.Ptr ww29 ->
+                           case Graphics.X11.Xlib.Misc.$wfillPolygon
+                                  ww25
+                                  ww27
+                                  ww29
+                                  TurtleGraphics.runGraphical16
+                                  0#
+                                  0#
+                                  ipv6 of ds4 { (#,#) ipv8 ipv9 ->
+                           $w$j ipv8 } } } } } } } } } } } } } } } }) -}
+27f8f035fcb28114bfc466c2e8e14188
+  runGraphical20 :: (GHC.Types.Int, GHC.Types.Int)
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: ((TurtleGraphics.runGraphical22,
+                  TurtleGraphics.runGraphical21)) -}
+59103f25b46036a0bce89907b80bc127
+  runGraphical21 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 0#) -}
+ad9a133a7339e8238cde9a781d7cf960
+  runGraphical22 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 300#) -}
+dff882a148c63978ce282d10d77dd528
+  runGraphical23 :: (GHC.Types.Int, GHC.Types.Int)
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: ((TurtleGraphics.runGraphical22,
+                  TurtleGraphics.runGraphical22)) -}
+ee38403de099b09da257a570fe6773ef
+  runGraphical24 :: (GHC.Types.Int, GHC.Types.Int)
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: ((TurtleGraphics.runGraphical21,
+                  TurtleGraphics.runGraphical22)) -}
+cc796ae50d40e0f38fad1caee0c0059e
+  runGraphical25 :: (GHC.Types.Int, GHC.Types.Int)
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: ((TurtleGraphics.runGraphical21,
+                  TurtleGraphics.runGraphical21)) -}
+4b9074e9304f61bf37f8ea5a327e203d
+  runGraphical26 :: GHC.Base.Maybe Graphics.HGL.Internals.Types.Time
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Base.Just
+                   @ Graphics.HGL.Internals.Types.Time
+                   TurtleGraphics.runGraphical27) -}
+b0134907aa841715846789dab1e4822c
+  runGraphical27 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (1000) -}
+211ffbb8c339fd4dc37470d2c4350951
+  runGraphical28 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   TurtleGraphics.runGraphical29) -}
+217fc49bc4938a3c79228d749558f739
+  runGraphical29 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Turtle!"#) -}
+23012682a08eaa381c009cda72f649d7
+  runGraphical3 :: [Graphics.HGL.Internals.Draw.Graphic]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Graphics.HGL.Internals.Draw.Graphic
+                   TurtleGraphics.runGraphical13
+                     `cast`
+                   (Trans
+                        (<Graphics.HGL.X11.Types.DC>_R ->_R Sym (GHC.Types.N:IO[0] <()>_R))
+                        (Sym (Graphics.HGL.Internals.Draw.N:Draw[0] <()>_R)))
+                   TurtleGraphics.runGraphical4) -}
+1769db069f8ae30dcd0cc5a055a2475c
+  runGraphical4 :: [Graphics.HGL.Internals.Draw.Graphic]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Graphics.HGL.Internals.Draw.Graphic
+                   TurtleGraphics.runGraphical11
+                     `cast`
+                   (Trans
+                        (<Graphics.HGL.X11.Types.DC>_R ->_R Sym (GHC.Types.N:IO[0] <()>_R))
+                        (Sym (Graphics.HGL.Internals.Draw.N:Draw[0] <()>_R)))
+                   TurtleGraphics.runGraphical5) -}
+3a85101228960068e161d10e475182db
+  runGraphical5 :: [Graphics.HGL.Internals.Draw.Graphic]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Graphics.HGL.Internals.Draw.Graphic
+                   TurtleGraphics.runGraphical9
+                     `cast`
+                   (Trans
+                        (<Graphics.HGL.X11.Types.DC>_R ->_R Sym (GHC.Types.N:IO[0] <()>_R))
+                        (Sym (Graphics.HGL.Internals.Draw.N:Draw[0] <()>_R)))
+                   TurtleGraphics.runGraphical6) -}
+6c47706a9994a395daa03452c1041eec
+  runGraphical6 :: [Graphics.HGL.Internals.Draw.Graphic]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Graphics.HGL.Internals.Draw.Graphic
+                   TurtleGraphics.runGraphical7
+                     `cast`
+                   (Trans
+                        (<Graphics.HGL.X11.Types.DC>_R ->_R Sym (GHC.Types.N:IO[0] <()>_R))
+                        (Sym (Graphics.HGL.Internals.Draw.N:Draw[0] <()>_R)))
+                   (GHC.Types.[] @ Graphics.HGL.Internals.Draw.Graphic)) -}
+be0393b71bf3848267d32f4accb0daf3
+  runGraphical7 ::
+    Graphics.HGL.X11.Types.DC
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Unfolding: (Graphics.HGL.Utils.withColor1
+                   Graphics.HGL.Utils.Black
+                   TurtleGraphics.runGraphical8
+                     `cast`
+                   (Trans
+                        (<Graphics.HGL.X11.Types.DC>_R ->_R Sym (GHC.Types.N:IO[0] <()>_R))
+                        (Sym (Graphics.HGL.Internals.Draw.N:Draw[0] <()>_R)))) -}
+6007d2b970de175e6be05458e071aed1
+  runGraphical8 ::
+    Graphics.HGL.X11.Types.DC
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(S(S)S(S)LS(S)LLL),1*U(1*U(U),1*U(U),A,1*U(U),A,A,A)><S,U>,
+     Unfolding: (\ (w2 :: Graphics.HGL.X11.Types.DC)
+                   (w3 :: GHC.Prim.State# GHC.Prim.RealWorld)[OneShot] ->
+                 case w2 of ww14 { Graphics.HGL.X11.Types.MkDC ww15 ww16 ww17 ww18 ww19 ww20 ww21 ->
+                 case ww15
+                        `cast`
+                      (Graphics.X11.Xlib.Types.N:Display[0]) of ww22 { GHC.Ptr.Ptr ww23 ->
+                 case ww16 of ww24 { GHC.Word.W64# ww25 ->
+                 case ww18
+                        `cast`
+                      (Graphics.X11.Xlib.Types.N:GC[0]) of ww26 { GHC.Ptr.Ptr ww27 ->
+                 case {__pkg_ccall X11-1.8 GHC.Prim.Addr#
+                                           -> GHC.Prim.Word#
+                                           -> GHC.Prim.Addr#
+                                           -> GHC.Prim.Int#
+                                           -> GHC.Prim.Int#
+                                           -> GHC.Prim.Int#
+                                           -> GHC.Prim.Int#
+                                           -> GHC.Prim.State# GHC.Prim.RealWorld
+                                           -> (# GHC.Prim.State# GHC.Prim.RealWorld #)}
+                        ww23
+                        ww25
+                        ww27
+                        100#
+                        150#
+                        200#
+                        150#
+                        w3 of wild { Unit# ds22 ->
+                 (# ds22, GHC.Tuple.() #) } } } } }) -}
+faa2a1f0b254515eee74f8ab42099192
+  runGraphical9 ::
+    Graphics.HGL.X11.Types.DC
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Unfolding: (Graphics.HGL.Utils.withColor1
+                   Graphics.HGL.Utils.Blue
+                   TurtleGraphics.runGraphical10
+                     `cast`
+                   (Trans
+                        (<Graphics.HGL.X11.Types.DC>_R ->_R Sym (GHC.Types.N:IO[0] <()>_R))
+                        (Sym (Graphics.HGL.Internals.Draw.N:Draw[0] <()>_R)))) -}
+462106d2f4c8ae031f4fe4ea1a1e52f3
+  runGraphical_w :: [Graphics.HGL.Internals.Types.Point]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Graphics.HGL.Internals.Types.Point
+                   TurtleGraphics.runGraphical25
+                   TurtleGraphics.runGraphical17) -}
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: none
+require own pkg trusted: False
+

@@ -30,6 +30,15 @@ module Turtle (
 
 -- | Exclude standard def of Right and Left and use our own definition
 import Prelude hiding (Right, Left)
+import qualified Graphics.HGL as HGL
+
+import TurtleGraphics.Logger
+import TurtleGraphics.State
+import TurtleGraphics.TurtleState
+
+
+type Colour = (Int, Int, Int)
+
 
 --   You can use newtype instead of data if you wish.
 data Program where
@@ -48,8 +57,15 @@ data Program where
   Forever   :: Program -> Program        
   Seq       :: Program -> Program -> Program 
 
+-- data Log a = Log (a, [String])
 
-data Colour = RGB Int Int Int
+-- instance Monad Log where
+--   return x = Log (x, [])
+--   Log (x,msg) >>= f = case f x of
+--                           Log (x, msg') -> Log (x, msg ++ msg')
+
+-- log :: String -> Log ()
+-- log m = Log ((), [m])
 
 -- | Move a distance forward
 forward :: Double -> Program
@@ -128,7 +144,7 @@ spiral' size angle = limited 100 $ spiralForever size angle
 
 -- | A spiral that starts finite and becomes infinite
 spiralFiniteThenInfite :: Double -> Double -> Program
-spiralFiniteThenInfite size angle =   
+spiralFiniteThenInfite size angle   
   | size > 100 = spiralForever size angle
   | otherwise  = (>*>) (forward size) $
                  (>*>) (right angle) (spiral (size+2) angle)
@@ -145,7 +161,7 @@ runTextual (Left      d)        = putStrLn $ "Left "     ++
                                               show d ++ " degree/s."
 runTextual Penup                = putStrLn $ "Stops drawing."          
 runTextual Pendown              = putStrLn $ "Starts drawing."
-runTextual (Color (RGB r g b))  = putStrLn $ "Switching to color (" ++
+runTextual (Color (r,g,b))      = putStrLn $ "Switching to color (" ++
                                               show r ++
                                               "," ++ show g ++
                                               "," ++ show b ++ ")"   
@@ -161,19 +177,35 @@ runTextual (Times     n p)      = putStrLn $ "Runs program " ++
 runTextual (Forever   p)        = putStrLn $ "Runs program forever."  
 
 
+
+runProgram :: Program -> State TurtleState Program
+runProgram (Seq p1 p2) = undefined
+runProgram (Forward d) = do
+  (TurtleState p a c is_drawing) <- getState
+  -- Do something with progam -- What? Should probably draw with HGL here.
+  -- How do I write on the same canvas, should it be in a state as well?
+  -- put (updatePos s d) -- update the position of the state
+  return (Forward d) -- What should be returned???
+
+-- run (Backward  d)       = undefined
+-- run (Right     d)       = undefined 
+-- run (Left      d)       = undefined 
+-- run  Penup              = undefined          
+-- run  Pendown            = undefined          
+-- run (Color (RGB r g b)) = undefined  
+-- run  Die                = undefined          
+-- run  Idle               = undefined          
+-- run (Limited   n p)     = undefined
+-- run (Lifespan  n p)     = undefined
+-- run (Times     n p)     = undefined    
+-- run (Forever   p)       = undefined
+
+
 -- | Run function
 run :: Program -> IO()
-run (Seq p1 p2)         = run p1 >> run p2
-run (Forward   d)       = undefined
-run (Backward  d)       = undefined
-run (Right     d)       = undefined 
-run (Left      d)       = undefined 
-run  Penup              = undefined          
-run  Pendown            = undefined          
-run (Color (RGB r g b)) = undefined  
-run  Die                = undefined          
-run  Idle               = undefined          
-run (Limited   n p)     = undefined
-run (Lifespan  n p)     = undefined
-run (Times     n p)     = undefined    
-run (Forever   p)       = undefined        
+run p         = do
+  putStrLn "Whatever logging should be happening"
+
+  where MkState f = runProgram p
+        (result, final_st) = f newTurtleState
+

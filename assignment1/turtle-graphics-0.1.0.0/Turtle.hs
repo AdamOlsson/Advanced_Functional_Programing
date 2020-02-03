@@ -1,7 +1,7 @@
 {-# LANGUAGE GADTs #-}
 
 -- | proper module documentation here
-module Turtle (
+module TurtleGraphics.Turtle (
 
   -- * The turtle type(s)
   -- Non-exhaustive list of possible types: Turtle, Program, Action, Operation ...
@@ -31,16 +31,12 @@ module Turtle (
 -- | Exclude standard def of Right and Left and use our own definition
 import Prelude hiding (Right, Left)
 import qualified Graphics.HGL as HGL
-
-import TurtleGraphics.Logger
-import TurtleGraphics.State
 import TurtleGraphics.TurtleState
 
 
-type Colour = (Int, Int, Int)
 
+type Colour = HGL.Color
 
---   You can use newtype instead of data if you wish.
 data Program where
   Forward   :: Double -> Program 
   Backward  :: Double -> Program 
@@ -56,16 +52,6 @@ data Program where
   Times     :: Int -> Program -> Program    
   Forever   :: Program -> Program        
   Seq       :: Program -> Program -> Program 
-
--- data Log a = Log (a, [String])
-
--- instance Monad Log where
---   return x = Log (x, [])
---   Log (x,msg) >>= f = case f x of
---                           Log (x, msg') -> Log (x, msg ++ msg')
-
--- log :: String -> Log ()
--- log m = Log ((), [m])
 
 -- | Move a distance forward
 forward :: Double -> Program
@@ -161,10 +147,7 @@ runTextual (Left      d)        = putStrLn $ "Left "     ++
                                               show d ++ " degree/s."
 runTextual Penup                = putStrLn $ "Stops drawing."          
 runTextual Pendown              = putStrLn $ "Starts drawing."
-runTextual (Color (r,g,b))      = putStrLn $ "Switching to color (" ++
-                                              show r ++
-                                              "," ++ show g ++
-                                              "," ++ show b ++ ")"   
+runTextual (Color c)      = putStrLn $ "Switching to color " ++ show c  
 runTextual Die                  = putStrLn $ "Kill the turtle :'("
 runTextual Idle                 = putStrLn $ "Idle..."          
 runTextual (Limited   n p)      = putStrLn $ "Runs a program for " ++
@@ -177,35 +160,59 @@ runTextual (Times     n p)      = putStrLn $ "Runs program " ++
 runTextual (Forever   p)        = putStrLn $ "Runs program forever."  
 
 
+-- | A program consist of a drawing window, turtle state and a bool keeping track of early termination
+type ProgramState = (HGL.Window, TurtleState, Bool)
 
-runProgram :: Program -> State TurtleState Program
-runProgram (Seq p1 p2) = undefined
-runProgram (Forward d) = do
-  (TurtleState p a c is_drawing) <- getState
-  -- Do something with progam -- What? Should probably draw with HGL here.
-  -- How do I write on the same canvas, should it be in a state as well?
-  -- put (updatePos s d) -- update the position of the state
-  return (Forward d) -- What should be returned???
+draw :: HGL.Window -> Bool -> HGL.Graphic -> IO()
+draw _ False _  = return ()
+draw w _ g      = do
+  HGL.getWindowTick w
+  HGL.drawInWindow w g
+  return () 
 
--- run (Backward  d)       = undefined
--- run (Right     d)       = undefined 
--- run (Left      d)       = undefined 
--- run  Penup              = undefined          
--- run  Pendown            = undefined          
--- run (Color (RGB r g b)) = undefined  
--- run  Die                = undefined          
--- run  Idle               = undefined          
--- run (Limited   n p)     = undefined
--- run (Lifespan  n p)     = undefined
--- run (Times     n p)     = undefined    
--- run (Forever   p)       = undefined
+runProgram :: Program -> ProgramState -> IO ProgramState
+runProgram (Seq p1 p2) s = runProgram p1 s >>= runProgram p2
+runProgram (Forward d) (w, (TurtleState (x,y) a c dr), t) = do
+      -- runTextual (Forward d)
+      putStrLn $ "Turtle moves from " ++ showP (x,y) ++ " to " ++ showP (x',y')
+      draw w dr $ HGL.withColor HGL.Red   $ HGL.line  (round(x), round(y)) (round(x'), round(y'))
+      return (w, (TurtleState (x',y') a c dr), t)
+      where
+        x' = x + sin(a)*d
+        y' = y + cos(a)*d
+runProgram (Backward d) (w, (TurtleState (x,y) a c dr), t) = do
+      -- runTextual (Backward d)
+      putStrLn $ "Turtle moves from " ++ showP (x,y) ++ " to " ++ showP (x',y')
+      draw w dr $ HGL.withColor HGL.Red   $ HGL.line  (round(x), round(y)) (round(x'), round(y'))
+      return (w, (TurtleState (x',y') a c dr), t)
+      where
+        x' = x - sin(a*pi)*d
+        y' = y - cos(a*pi)*d
+
+runProgram (Right d) (w, st, t)          = runTextual (Right d) >> return (w, updateAngle st (-d), t)
+runProgram (Left  d) (w, st, t)          = runTextual (Left d)  >> return (w, updateAngle st   d , t)
+runProgram  Penup    (w, st, t)          = runTextual Penup     >> return (w, toggleDrawing st   , t)           
+runProgram  Pendown  (w, st, t)          = runTextual Pendown   >> return (w, toggleDrawing st   , t)   
+runProgram (Color c) (w, st, t)          = runTextual (Color c) >> return (w, updateColor st c, t)
+runProgram  Die (w, st, t)               = runTextual Die >> return (w, st, True) -- ??
+runProgram  Idle (w, st, t)              = runTextual Idle >> return (w, st, t)          
+-- runProgram (Limited   n p)     = undefined
+-- runProgram (Lifespan  n p) st    = runTextual (Lifespan)
+runProgram (Times     n p) st    = runTextual (Times n p) >> case n < 1 of
+                                                                    True -> return st
+                                                                    _ ->  runProgram p st >>=
+                                                                          runProgram (Times (n-1) p)
+runProgram (Forever   p)   st    = runProgram p st >>= runProgram (Forever p)
 
 
--- | Run function
-run :: Program -> IO()
-run p         = do
-  putStrLn "Whatever logging should be happening"
 
-  where MkState f = runProgram p
-        (result, final_st) = f newTurtleState
+run :: Program -> IO ()
+run p = HGL.runGraphics $ do
+    w <- HGL.openWindowEx "Turtle!" Nothing (720, 640) HGL.DoubleBuffered (Just 1000)
+    HGL.drawInWindow w (HGL.polygon [(0,0),(0,640),(720,640),(720,0)])
+    runProgram p (w, newTurtleState, False)
+    HGL.getKey w >> return ()
+
+f :: Program
+f = (>*>) (Forward 100.0) $ (>*>) (Right 90) $ (>*>) Penup $ (>*>) (Forward 100.0) $ (>*>) (Left 90) $ (>*>) Pendown (Forward 100.0) 
 

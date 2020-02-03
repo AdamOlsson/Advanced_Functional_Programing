@@ -1,12 +1,14 @@
 
 module TurtleGraphics.TurtleState where
 
+import qualified Graphics.HGL as HGL
+
 -- | Point on the canvas
-type Point = (Int, Int)
+type Point = (Double, Double)
 -- | Angle of the facing direction of the turtle
 type Angle = Double
 -- | Drawing color, RGB
-type Color = (Int, Int, Int)
+type Color = HGL.Color
 
 data TurtleState = TurtleState {
     pos       :: Point,
@@ -15,21 +17,27 @@ data TurtleState = TurtleState {
     isDrawing :: Bool
 }
 
+showP :: (Double, Double) -> [Char]
+showP (x, y) = "(" ++ show x ++ ", " ++ show y ++ ")"
+
+showSt :: TurtleState -> IO()
+showSt (TurtleState pos ang c _) = putStrLn $
+                                    "(Pos: " ++ showP pos ++
+                                    ", Angle: " ++ show ang ++
+                                    ", Color: " ++ show c
+
 newTurtleState :: TurtleState
-newTurtleState = TurtleState {  pos         = (0,0),
-                                angle       = 90.0,
-                                c           = (200, 0, 0),
+newTurtleState = TurtleState {  pos         = (200,200),
+                                angle       = 45.0,
+                                c           = HGL.Red,
                                 isDrawing   = True
                             }
 
-updateDrawing :: TurtleState -> Bool -> TurtleState
-updateDrawing (TurtleState p a c _) d = TurtleState p a c d
+toggleDrawing :: TurtleState -> TurtleState
+toggleDrawing (TurtleState p a c d) = TurtleState p a c (not d)
 
-updateColor :: TurtleState -> Color -> TurtleState
+updateColor :: TurtleState -> HGL.Color -> TurtleState
 updateColor (TurtleState p a _ d) c = TurtleState p a c d
 
-updatePos :: TurtleState -> Point -> TurtleState
-updatePos (TurtleState _ a c d) p = TurtleState p a c d
-
 updateAngle :: TurtleState -> Angle -> TurtleState
-updateAngle (TurtleState p _ c d) a = TurtleState p a c d
+updateAngle (TurtleState p a c d) a' = TurtleState p (a+a') c (d)

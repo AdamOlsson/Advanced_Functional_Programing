@@ -5,8 +5,8 @@ import qualified Graphics.HGL as HGL
 
 import Turtle
 
-runGraphical :: Program -> IO ()
-runGraphical p = HGL.runGraphics $ do
+runGraphical :: IO ()
+runGraphical = HGL.runGraphics $ do
     w <- HGL.openWindowEx "Turtle!" Nothing (300, 300) HGL.DoubleBuffered (Just 1000)
     HGL.drawInWindow w (HGL.polygon [(0,0),(0,300),(300,300),(300,0)])
     onTick w [ HGL.withColor HGL.Red   $ HGL.line  (100, 200) (200, 100)

@@ -19,6 +19,11 @@ module TurtleGraphics.Turtle (
   , times
   , forever
 
+  -- * Colors
+  , blue
+  , green
+  , red
+
   -- * Run functions
   , run
 
@@ -28,9 +33,8 @@ module TurtleGraphics.Turtle (
 import Prelude hiding (Right, Left)
 import qualified Graphics.HGL as HGL
 import TurtleGraphics.TurtleState
-
-
 type Colour = HGL.Color
+
 
 data Program where
   Forward   :: Double -> Program 
@@ -131,6 +135,19 @@ spiralFiniteThenInfite size angle
   | size > 100 = spiralForever size angle
   | otherwise  = (>*>) (forward size) $
                  (>*>) (right angle) (spiral (size+2) angle)
+
+
+-- | Blue color
+blue :: HGL.Color
+blue = HGL.Blue
+
+-- | Red color
+red :: HGL.Color
+red = HGL.Red
+
+-- | Green color
+green :: HGL.Color
+green = HGL.Green
 
 
 -- | Print the textual interface. 

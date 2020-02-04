@@ -4,14 +4,14 @@ module Examples where
 import TurtleGraphics.Turtle
 
 
--- example1 :: Program
--- example1 = (>*>) (forward 100.0) 
---             $ (>*>) (right 90) 
---             $ (>*>) penup 
---             $ (>*>) (forward 100.0)
---             $ (>*>) (color blue)
---             $ (>*>) (left 90)
---             $ (>*>) pendown (forward 100.0)
+example1 :: Program
+example1 = (>*>) (forward 100.0) 
+            $ (>*>) (right 90) 
+            $ (>*>) penup 
+            $ (>*>) (forward 100.0)
+            $ (>*>) (color blue)
+            $ (>*>) (left 90)
+            $ (>*>) pendown (forward 100.0)
 
 
 example2 :: Program
@@ -46,3 +46,6 @@ forward3 = (>*>) (forward 50)
 example6 :: Program
 example6 =    (>*>) (lifespan 4 forward3)
             $ (>*>) (forward 50) (forward 50)
+
+main :: Program
+main = example5

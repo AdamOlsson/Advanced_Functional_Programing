@@ -298,6 +298,9 @@ runProgram (Limited   n p) (w, st, t, l) = case n < 1 of
   _    -> runTextual (Limited n p) st st >>
           runProgram p (w, st, t, n)
 
+{- Question: What definition of time do you use (what can a turtle achieve in a single time unit)?
+We define that one action is going to take 1 timeunit to complete.
+-}
 
 -- | Entry point (run function)
 run :: Program -> IO ()

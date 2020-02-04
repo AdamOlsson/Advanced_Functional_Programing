@@ -47,6 +47,8 @@ data Program where
   Times     :: Int -> Program -> Program    
   Forever   :: Program -> Program        
   Seq       :: Program -> Program -> Program 
+  Counter   :: Int -> Program -> Program    
+
 
 -- | Move a distance forward
 forward :: Double -> Program
@@ -174,18 +176,19 @@ runTextual Penup          _ _ = putStrLn $ "Turtle stopped drawing."
 runTextual (Forever p)    _ _ = putStrLn $ "Turtle runs the program forever."
 runTextual Idle           _ _ = putStrLn $ "Turtle is idle..."
 runTextual Die            _ _ = putStrLn $ "Turtle dies :'("
-runTextual (Limited  n p) _ _ = putStrLn $ "Runs the program for " ++
-                                            show n ++ " more timeunits then dies."
-runTextual (Lifespan n p) _ _ = putStrLn $ "Runs the program for " ++
+runTextual (Lifespan  n p) _ _ = putStrLn $ "Runs the program for " ++
+                                            show n ++ " timeunits then dies."
+runTextual (Limited n p) _ _ = putStrLn $ "Runs the program for " ++
                                             show n ++ " more timeunits then continues."
-
+runTextual (Counter n p) _ _ = putStrLn $ "Runs for " ++ show n ++ " more timesteps."
 
 -- | A program consist of a drawing window, turtle state and a bool keeping track of early termination
-type ProgramState = (HGL.Window, TurtleState, Bool)
+type ProgramState = (HGL.Window, TurtleState, Bool, Int)
+-- record type
 
 -- |Draw function that does not wait for the event tick.
 drawNoTick :: ProgramState -> TurtleState -> IO()
-drawNoTick (w, st, _) st' = case getDrawing st of 
+drawNoTick (w, st, _, _) st' = case getDrawing st of 
   False -> return ()
   _     -> HGL.drawInWindow w $ HGL.withColor c $ HGL.line (round(x), round(y)) (round(x'), round(y'))
            where
@@ -195,79 +198,88 @@ drawNoTick (w, st, _) st' = case getDrawing st of
 
 -- | Helper run function
 runProgram :: Program -> ProgramState -> IO ProgramState
-runProgram (Seq p1 p2) s = runProgram p1 s >>= runProgram p2
-runProgram (Forward d) (w, st, t) = do
+runProgram (Seq p1 p2) (w, st, t, l) = case (t, l < 1) of
+  (True,_) -> return (w, st, t, l)
+  (_, True)-> runProgram p1 (w, st, t, 0) >>= runProgram p2
+  _        -> runProgram p1 (w, st, t, l) >>= runProgram (Counter (l-1) p2)
+
+runProgram (Counter   n p) (w, st, t, l) = case n < 1 of 
+  True -> return (w, st, t, 0)
+  _    -> runTextual (Counter n p) st st >>
+          runProgram p (w, st, t, n)
+
+runProgram (Lifespan n p) (w, st, t, l) =  case n < 1 of 
+  True -> return (w, st, t, 0)
+  _    -> runTextual (Lifespan n p) st st >>
+          runProgram p (w, st, t, n) >> runProgram die (w, st, t, 0)
+
+runProgram (Forward d) (w, st, t, l) = do
   runTextual (Forward d) st st'
-  drawNoTick (w, st, t) st'
-  return (w, st', t)
+  drawNoTick (w, st, t, l) st'
+  return (w, st', t, l)
   where
     (x, y)  = getPos st
     x'      = x + sin(getAngle st)*d
     y'      = y + cos(getAngle st)*d
     st'     = updatePos st (x',y')
     
-runProgram (Backward d) (w, st, t) = do
+runProgram (Backward d) (w, st, t, l) = do
   runTextual (Backward d) st st'
-  drawNoTick (w, st, t) st'
-  return (w, st', t)
+  drawNoTick (w, st, t, l) st'
+  return (w, st', t, l)
   where
     (x, y) = getPos st
     x' = x - sin(getAngle st)*d
     y' = y - cos(getAngle st)*d
     st'     = updatePos st (x',y')
 
-runProgram (Right d) (w, st, t) = do
+runProgram (Right d) (w, st, t, l) = do
   runTextual (Right d) st st'
-  return (w, st', t)
+  return (w, st', t, l)
   where
     a  = getAngle st
     a' = a - d
     st' = updateAngle st a'
 
-runProgram (Left d) (w, st, t) = do
+runProgram (Left d) (w, st, t, l) = do
   runTextual (Left d) st st'
-  return (w, st', t)
+  return (w, st', t, l)
   where
     a  = getAngle st
     a' = a + d
     st' = updateAngle st a'
 
-runProgram (Color c) (w, st, t) = do
+runProgram (Color c) (w, st, t, l) = do
   runTextual (Color c) st st'
-  return (w, st', t)
+  return (w, st', t, l)
   where
     c'  = getColor st
     st' = updateColor st c
 
-runProgram (Forever p) (w, st, t)    =   runTextual (Forever p) st st >>
-                                         runProgram
-                                         ((>*>) p (Forever p)) (w, st, t)
-runProgram  Penup    (w, st, t)      =   runTextual Penup   st st >>
-                                         return (w, toggleDrawing st, t)
-runProgram  Pendown  (w, st, t)      =   runTextual Pendown st st >>
-                                         return (w, toggleDrawing st, t)
-runProgram  Idle (w, st, t)          =   runTextual Idle    st st >>
-                                         return (w, st, t)
-runProgram (Times n p) (w, st, t)    =   case n < 1 of
-                                          True -> runProgram p (w, st, t)
-                                          _    -> 
-                                            runTextual (Times n p) st st >>
-                                            runProgram 
-                                            ((>*>) p (Times (n-1) p)) (w, st, t)
-runProgram  Die (w, st, t)           =   runTextual Die st st >>
-                                         return (w, st, True)
-runProgram (Lifespan n p) (w, st, t) =   runTextual (Lifespan n p) st st >>
-                                         HGL.getWindowTick w >>
-                                         case n < 1 of
-                                           True -> runProgram Die (w, st, t)
-                                           _    -> runProgram 
-                                                   ((>*>) p (Lifespan (n-1) p)) (w, st, t)
-runProgram (Limited   n p) (w, st, t)=  runTextual (Limited n p) st st >>
-                                        HGL.getWindowTick w >>
-                                        case n < 1 of
-                                          True -> runProgram p (w, st, t)
-                                          _    -> runProgram 
-                                                  ((>*>) p (Limited (n-1) p)) (w, st, t)
+runProgram (Forever p) (w, st, t, l)    = runTextual (Forever p) st st >>
+                                          runProgram
+                                          ((>*>) p (Forever p)) (w, st, t, l)
+
+runProgram  Penup    (w, st, t, l)      = runTextual Penup   st st >>
+                                          return (w, toggleDrawing st, t, l)
+runProgram  Pendown  (w, st, t, l)      = runTextual Pendown st st >>
+                                          return (w, toggleDrawing st, t, l)
+runProgram  Idle (w, st, t, l)          = runTextual Idle    st st >>
+                                          return (w, st, t, l)
+runProgram (Times n p) (w, st, t, l) = case n <= 0 of
+                                         True -> return (w, st, t, l)
+                                         _    -> runTextual (Times n p) st st >>
+                                          runProgram 
+                                          ((>*>) p (Times (n-1) p)) (w, st, t, l)
+runProgram  Die (w, st, t, l)           = runTextual Die st st >>
+                                          return (w, st, True, l)
+
+
+
+runProgram (Limited   n p) (w, st, t, l) = case n < 1 of 
+  True -> return (w, st, t, 0)
+  _    -> runTextual (Limited n p) st st >>
+          runProgram p (w, st, t, n)
 
 
 -- | Entry point (run function)
@@ -275,5 +287,5 @@ run :: Program -> IO ()
 run p = HGL.runGraphics $ do
     w <- HGL.openWindowEx "Turtle!" Nothing (720, 640) HGL.DoubleBuffered (Just 1000)
     HGL.drawInWindow w (HGL.polygon [(0,0),(0,640),(720,640),(720,0)])
-    runProgram p (w, newTurtleState, False)
+    runProgram p (w, newTurtleState, False, 0)
     HGL.getKey w >> return ()

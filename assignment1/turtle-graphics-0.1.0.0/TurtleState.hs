@@ -1,5 +1,5 @@
 
-module TurtleGraphics.TurtleState where
+module TurtleState where
 
 import qualified Graphics.HGL as HGL
 

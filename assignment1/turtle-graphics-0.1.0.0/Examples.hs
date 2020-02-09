@@ -1,7 +1,7 @@
 
 module Examples where
 
-import TurtleGraphics.Turtle
+import Turtle
 
 
 example1 :: Program

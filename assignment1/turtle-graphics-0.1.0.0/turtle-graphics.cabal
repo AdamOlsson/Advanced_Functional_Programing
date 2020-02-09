@@ -19,8 +19,8 @@ library
     TurtleGraphics
     , Turtle
   other-modules:
-    TurtleGraphics.TurtleState
-    , TurtleGraphics.Turtle
+    TurtleState
+    , Turtle
          
   build-depends:       base >= 4 && < 5,
                        HGL

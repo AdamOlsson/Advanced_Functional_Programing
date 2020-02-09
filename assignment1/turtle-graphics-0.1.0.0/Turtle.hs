@@ -1,10 +1,10 @@
 {-# LANGUAGE GADTs #-}
 
 -- | proper module documentation here
-module TurtleGraphics.Turtle (
+module Turtle (
 
   -- * The turtle type(s)
-  -- Non-exhaustive list of possible types: Turtle, Program, Action, Operation ...
+  -- Non-exhaustive list of possible types: Turtle, Program, Action, Operation
   Program
 
   -- * Primitive operations
@@ -32,7 +32,7 @@ module TurtleGraphics.Turtle (
 -- | Exclude standard def of Right and Left and use our own definition
 import Prelude hiding (Right, Left)
 import qualified Graphics.HGL as HGL
-import TurtleGraphics.TurtleState
+import TurtleState
 type Colour = HGL.Color
 
 
@@ -196,10 +196,13 @@ runTextual Die            _ _ = putStrLn $ "Turtle dies :'("
 runTextual (Lifespan  n p) _ _ = putStrLn $ "Runs the program for " ++
                                             show n ++ " timeunits then dies."
 runTextual (Limited n p) _ _ = putStrLn $ "Runs the program for " ++
-                                            show n ++ " more timeunits then continues."
-runTextual (Counter n p) _ _ = putStrLn $ "Runs for " ++ show n ++ " more timesteps."
+                                            show n ++ " more timeunits " ++
+                                            "then continues."
+runTextual (Counter n p) _ _ = putStrLn $ "Runs for " ++ show n ++ 
+                                          " more timesteps."
 
--- | A program consist of a drawing window, turtle state and a bool keeping track of early termination
+{- | A program consist of a drawing window, turtle state and a 
+bool keeping track of early termination-}
 type ProgramState = (HGL.Window, TurtleState, Bool, Int)
 -- record type
 
@@ -207,7 +210,8 @@ type ProgramState = (HGL.Window, TurtleState, Bool, Int)
 drawNoTick :: ProgramState -> TurtleState -> IO()
 drawNoTick (w, st, _, _) st' = case getDrawing st of 
   False -> return ()
-  _     -> HGL.drawInWindow w $ HGL.withColor c $ HGL.line (round(x), round(y)) (round(x'), round(y'))
+  _     -> HGL.drawInWindow w $ HGL.withColor c $ HGL.line (round(x), round(y))
+                                                         (round(x'), round(y'))
            where
             c         = getColor st
             (x, y)    = getPos st  
@@ -284,10 +288,11 @@ runProgram  Pendown  (w, st, t, l)      = runTextual Pendown st st >>
 runProgram  Idle (w, st, t, l)          = runTextual Idle    st st >>
                                           return (w, st, t, l)
 runProgram (Times n p) (w, st, t, l) = case n <= 0 of
-                                         True -> return (w, st, t, l)
-                                         _    -> runTextual (Times n p) st st >>
+                                         True-> return (w, st, t, l)
+                                         _   -> runTextual (Times n p) st st >>
                                           runProgram 
-                                          ((>*>) p (Times (n-1) p)) (w, st, t, l)
+                                          ((>*>) p (Times (n-1) p)) 
+                                           (w, st, t, l)
 runProgram  Die (w, st, t, l)           = runTextual Die st st >>
                                           return (w, st, True, l)
 
@@ -298,7 +303,8 @@ runProgram (Limited   n p) (w, st, t, l) = case n < 1 of
   _    -> runTextual (Limited n p) st st >>
           runProgram p (w, st, t, n)
 
-{- Question: What definition of time do you use (what can a turtle achieve in a single time unit)?
+{- Question: What definition of time do you use (what can a turtle achieve in
+   a single time unit)?
 We define that one action is going to take 1 timeunit to complete.
 -}
 

@@ -38,9 +38,11 @@ type Colour = HGL.Color
 
 data Program where
   Forward   :: Double -> Program 
-  Backward  :: Double -> Program 
+  Backward  :: Double -> Program
+  Move      :: Double -> Program
   Right     :: Double -> Program 
-  Left      :: Double -> Program 
+  Left      :: Double -> Program
+  Rotate    :: Double -> Program 
   Penup     :: Program           
   Pendown   :: Program           
   Color     :: Colour -> Program  
@@ -51,7 +53,8 @@ data Program where
   Times     :: Int -> Program -> Program    
   Forever   :: Program -> Program        
   Seq       :: Program -> Program -> Program 
-  Counter   :: Int -> Program -> Program    
+  Counter   :: Int -> Program -> Program
+  Parallel  :: Program -> Program -> Program
 
 
 -- | Move a distance forward
@@ -110,6 +113,9 @@ forever = Forever
 (>*>) :: Program -> Program -> Program
 (>*>) = Seq 
 
+(<|>) :: Program -> Program -> Program
+(<|>) = Parallel
+
 -- | Draws a spiral
 spiral :: Double -> Double -> Program
 spiral size angle 
@@ -152,33 +158,21 @@ green = HGL.Green
 
 -- | Print the textual interface. 
 runTextual :: Program -> TurtleState -> TurtleState -> IO ()
-runTextual (Forward   d) st st' = 
-  putStrLn $ "Turtle took " ++ show d ++ " steps forward" ++
+runTextual (Move   d) st st' = 
+  putStrLn $ "Turtle took " ++ show d ++ " steps " ++ bf ++
   " from " ++ showP a ++ " to " ++ showP b ++ "."
   where
     a = getPos st
     b = getPos st'
+    bf = if d > 0 then "forward" else "backward"
 
-runTextual (Backward   d) st st' = 
-  putStrLn $ "Turtle took " ++ show d ++ " steps backward" ++
-  " from " ++ showP a ++ " to " ++ showP b ++ "."
-  where
-    a = getPos st
-    b = getPos st'
-
-runTextual (Right   d) st st' = 
-  putStrLn $ "Turtle rotate " ++ show d ++ " degree/s right" ++
+runTextual (Rotate   d) st st' = 
+  putStrLn $ "Turtle rotate " ++ show (abs d) ++ " degree/s " ++ lr ++
   " from " ++ show a ++ " to " ++ show b ++ "."
   where
     a = getAngle st
     b = getAngle st'
-
-runTextual (Left   d) st st' = 
-  putStrLn $ "Turtle rotate " ++ show d ++ " degree/s left" ++
-  " from " ++ show a ++ " to " ++ show b ++ "."
-  where
-    a = getAngle st
-    b = getAngle st'
+    lr = if a < 0 then "left" else "right"
 
 runTextual (Color   _) st st' = 
   putStrLn $ "Turtle switch color from " ++ show a ++
@@ -203,12 +197,11 @@ runTextual (Counter n p) _ _ = putStrLn $ "Runs for " ++ show n ++
 
 {- | A program consist of a drawing window, turtle state and a 
 bool keeping track of early termination-}
-type ProgramState = (HGL.Window, TurtleState, Bool, Int)
--- record type
+type ProgramState = (HGL.Window, [TurtleState], Bool, Int)
 
 -- |Draw function that does not wait for the event tick.
 drawNoTick :: ProgramState -> TurtleState -> IO()
-drawNoTick (w, st, _, _) st' = case getDrawing st of 
+drawNoTick (w, (st:sts), _, _) st' = case getDrawing st of 
   False -> return ()
   _     -> HGL.drawInWindow w $ HGL.withColor c $ HGL.line (round(x), round(y))
                                                          (round(x'), round(y'))
@@ -219,89 +212,83 @@ drawNoTick (w, st, _, _) st' = case getDrawing st of
 
 -- | Helper run function
 runProgram :: Program -> ProgramState -> IO ProgramState
-runProgram (Seq p1 p2) (w, st, t, l) = case (t, l < 1) of
-  (True,_) -> return (w, st, t, l)
-  (_, True)-> runProgram p1 (w, st, t, 0) >>= runProgram p2
-  _        -> runProgram p1 (w, st, t, l) >>= runProgram (Counter (l-1) p2)
+runProgram (Seq p1 p2) (w, (st:sts), t, l) = case (t, l < 1) of
+  (True,_) -> return (w, [st], t, l)
+  (_, True)-> runProgram p1 (w, [st], t, 0) >>= runProgram p2
+  _        -> runProgram p1 (w, [st], t, l) >>= runProgram (Counter (l-1) p2)
 
-runProgram (Counter   n p) (w, st, t, l) = case n < 1 of 
-  True -> return (w, st, t, 0)
+runProgram (Counter   n p) (w, (st:sts), t, l) = case n < 1 of 
+  True -> return (w, [st], t, 0)
   _    -> runTextual (Counter n p) st st >>
-          runProgram p (w, st, t, n)
+          runProgram p (w, [st], t, n)
 
-runProgram (Lifespan n p) (w, st, t, l) =  case n < 1 of 
-  True -> return (w, st, t, 0)
+runProgram (Lifespan n p) (w, (st:sts), t, l) =  case n < 1 of 
+  True -> return (w, [st], t, 0)
   _    -> runTextual (Lifespan n p) st st >>
-          runProgram p (w, st, t, n) >> runProgram die (w, st, t, 0)
+          runProgram p (w, [st], t, n) >> runProgram die (w, [st], t, 0)
 
-runProgram (Forward d) (w, st, t, l) = do
-  runTextual (Forward d) st st'
-  drawNoTick (w, st, t, l) st'
-  return (w, st', t, l)
-  where
-    (x, y)  = getPos st
-    x'      = x + sin(getAngle st)*d
-    y'      = y + cos(getAngle st)*d
-    st'     = updatePos st (x',y')
-    
-runProgram (Backward d) (w, st, t, l) = do
-  runTextual (Backward d) st st'
-  drawNoTick (w, st, t, l) st'
-  return (w, st', t, l)
+runProgram (Forward d)  st = runProgram (Move   d ) st
+runProgram (Backward d) st = runProgram (Move (-d)) st
+runProgram (Move d) (w, (st:sts), t, l) = do
+  runTextual (Move d) st st'
+  drawNoTick (w, (st:sts), t, l) st'
+  return (w, [st'], t, l)
   where
     (x, y) = getPos st
     x' = x - sin(getAngle st)*d
     y' = y - cos(getAngle st)*d
     st'     = updatePos st (x',y')
 
-runProgram (Right d) (w, st, t, l) = do
-  runTextual (Right d) st st'
-  return (w, st', t, l)
-  where
-    a  = getAngle st
-    a' = a - d
-    st' = updateAngle st a'
-
-runProgram (Left d) (w, st, t, l) = do
-  runTextual (Left d) st st'
-  return (w, st', t, l)
+runProgram (Right d) st = runProgram (Rotate (-d)) st
+runProgram (Left  d) st = runProgram (Rotate   d ) st
+runProgram (Rotate d) (w, (st:sts), t, l) = do
+  runTextual (Rotate d) st st'
+  return (w, [st'], t, l)
   where
     a  = getAngle st
     a' = a + d
     st' = updateAngle st a'
 
-runProgram (Color c) (w, st, t, l) = do
+runProgram (Color c) (w, (st:sts), t, l) = do
   runTextual (Color c) st st'
-  return (w, st', t, l)
+  return (w, [st'], t, l)
   where
     c'  = getColor st
     st' = updateColor st c
 
-runProgram (Forever p) (w, st, t, l)    = runTextual (Forever p) st st >>
+runProgram (Forever p) (w, (st:sts), t, l)    = runTextual (Forever p) st st >>
                                           runProgram
-                                          ((>*>) p (Forever p)) (w, st, t, l)
+                                          ((>*>) p (Forever p)) (w, [st], t, l)
 
-runProgram  Penup    (w, st, t, l)      = runTextual Penup   st st >>
-                                          return (w, toggleDrawing st, t, l)
-runProgram  Pendown  (w, st, t, l)      = runTextual Pendown st st >>
-                                          return (w, toggleDrawing st, t, l)
-runProgram  Idle (w, st, t, l)          = runTextual Idle    st st >>
-                                          return (w, st, t, l)
-runProgram (Times n p) (w, st, t, l) = case n <= 0 of
-                                         True-> return (w, st, t, l)
+runProgram  Penup    (w, (st:sts), t, l)      = runTextual Penup   st st >>
+                                          return (w, (toggleDrawing st : sts), t, l)
+runProgram  Pendown  (w, (st:sts), t, l)      = runTextual Pendown st st >>
+                                          return (w, (toggleDrawing st : sts), t, l)
+runProgram  Idle (w, (st:sts), t, l)          = runTextual Idle    st st >>
+                                          return (w, [st], t, l)
+runProgram (Times n p) (w, (st:sts), t, l) = case n <= 0 of
+                                         True-> return (w, [st], t, l)
                                          _   -> runTextual (Times n p) st st >>
                                           runProgram 
                                           ((>*>) p (Times (n-1) p)) 
-                                           (w, st, t, l)
-runProgram  Die (w, st, t, l)           = runTextual Die st st >>
-                                          return (w, st, True, l)
-
-
-
-runProgram (Limited   n p) (w, st, t, l) = case n < 1 of 
-  True -> return (w, st, t, 0)
+                                           (w, [st], t, l)
+runProgram  Die (w, (st:sts), t, l)           = runTextual Die st st >>
+                                          return (w, [st], True, l)
+runProgram (Limited   n p) (w, (st:sts), t, l) = case n < 1 of 
+  True -> return (w, [st], t, 0)
   _    -> runTextual (Limited n p) st st >>
-          runProgram p (w, st, t, n)
+          runProgram p (w, [st], t, n)
+
+
+-- runProgram (Parallel p1 p2) (w, (st:sts), t, l) = do
+--   step p1 st -> return new state
+--   step p2 newState -> return new state 2
+
+  {-
+  1. Create new turtle with new id, same pos
+  2. Add Turtle
+  3. Step
+  -}
 
 {- Question: What definition of time do you use (what can a turtle achieve in
    a single time unit)?
@@ -313,5 +300,5 @@ run :: Program -> IO ()
 run p = HGL.runGraphics $ do
     w <- HGL.openWindowEx "Turtle!" Nothing (720, 640) HGL.DoubleBuffered (Just 1000)
     HGL.drawInWindow w (HGL.polygon [(0,0),(0,640),(720,640),(720,0)])
-    runProgram p (w, newTurtleState, False, 0)
+    runProgram p (w, [newTurtleState], False, 0)
     HGL.getKey w >> return ()

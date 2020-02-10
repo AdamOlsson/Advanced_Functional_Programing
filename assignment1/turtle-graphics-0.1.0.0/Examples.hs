@@ -47,5 +47,6 @@ example6 :: Program
 example6 =    (>*>) (lifespan 4 forward3)
             $ (>*>) (forward 50) (forward 50)
 
+
 main :: Program
 main = example5

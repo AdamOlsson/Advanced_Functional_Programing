@@ -280,15 +280,38 @@ runProgram (Limited   n p) (w, (st:sts), t, l) = case n < 1 of
           runProgram p (w, [st], t, n)
 
 
--- runProgram (Parallel p1 p2) (w, (st:sts), t, l) = do
---   step p1 st -> return new state
---   step p2 newState -> return new state 2
+runProgram (Parallel p p') (w, (st:sts), t, l) = 
+  case p of
+    Seq p1 p2 -> undefined
+    _         -> do 
+      runProgram p (w, (st:sts), t, l)
+      runProgram
+      
+
+
+
+  --  do
+  -- let s1 = runProgram step1 (w, (st:sts), t, l)
+  -- where
+  --   step1 = chop p1
+  --   step2 = chop p2
+  -- step p1 st -> return new state
+  -- step p2 newState -> return new state 2
 
   {-
   1. Create new turtle with new id, same pos
   2. Add Turtle
   3. Step
   -}
+
+-- step :: Program -> ProgramState -> IO ProgramState
+-- step (Seq p1 p2) (w, (st:sts), t, l) = do
+--   return 
+
+chop :: Program -> Program
+chop (Seq p1 p2) = p1
+chop p           = p
+
 
 {- Question: What definition of time do you use (what can a turtle achieve in
    a single time unit)?

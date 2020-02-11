@@ -13,13 +13,11 @@ module Replay
 
 import Control.Monad (ap)
 
-data Replay q r a 
-  where
-  Return    :: a -> Replay q r a
-  Bind      :: Replay q r a -> (a -> Replay q r b) -> Replay q r b
-  -- Io        ::
-  -- Ask       ::
-  -- AddAnswer ::
+data Replay q r a where
+  Return :: a -> Replay q r a
+  Bind   :: Replay q r a -> (a -> Replay q r b) -> Replay q r b
+  IO     :: IO a -> Replay q r a
+
 
 instance Monad (Replay q r) where
   return = Return
@@ -39,7 +37,7 @@ data Item r = Answer r | Result String
   deriving (Show, Read)
 
 io :: (Show a, Read a) => IO a -> Replay q r a
-io = undefined
+io action = IO action
 
 ask :: q -> Replay q r r
 ask = undefined
@@ -52,3 +50,19 @@ addAnswer t r = t ++ [Answer r]
 
 run :: Replay q r a -> Trace r -> IO (Either (q, Trace r) a)
 run = undefined
+
+
+import Data.Time (getCurrentTime, diffUTCTime)
+
+-- example :: Replay String String Int
+-- example = io t0 <- io getCurrentTime
+
+  -- t0 <- io getCurrentTime
+  -- io (putStrLn "Hello!")
+  -- age <- ask "What is your age?" 
+  -- io (putStrLn ("You are " ++ age))
+  -- name <- ask "What is your name?"
+  -- io (putStrLn (name ++ " is " ++ age ++ " years old"))
+  -- t1 <- io getCurrentTime
+  -- io (putStrLn ("Total time: " ++ show (diffUTCTime t1 t0)))
+  -- return (read age)

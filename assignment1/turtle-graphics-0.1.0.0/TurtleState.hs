@@ -16,7 +16,7 @@ data TurtleState = TurtleState {
     c         :: Color,
     isDrawing :: Bool,
     tid       :: Int
-}
+    }
 
 showP :: (Double, Double) -> [Char]
 showP (x, y) = "(" ++ show (round(x)) ++ ", " ++ show (round(y)) ++ ")"
@@ -30,8 +30,8 @@ showSt (TurtleState pos ang c b id) = putStrLn $
                                     ", id: " ++ show id
 
 newTurtleState :: TurtleState
-newTurtleState = TurtleState {  pos         = (200,200),
-                                angle       = 45.0,
+newTurtleState = TurtleState {  pos         = (350,300),
+                                angle       = (pi/2),
                                 c           = HGL.Red,
                                 isDrawing   = True,
                                 tid         = 0

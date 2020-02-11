@@ -21,6 +21,8 @@ library
   other-modules:
     TurtleState
     , Turtle
+    , Turtle2
+
          
   build-depends:       base >= 4 && < 5,
                        HGL

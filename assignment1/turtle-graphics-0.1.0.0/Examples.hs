@@ -1,16 +1,16 @@
 
 module Examples where
 
-import Turtle
+import Turtle2
 
 
 example1 :: Program
 example1 = (>*>) (forward 100.0) 
-            $ (>*>) (right 90) 
+            $ (>*>) (right (pi/2)) 
             $ (>*>) penup 
             $ (>*>) (forward 100.0)
             $ (>*>) (color blue)
-            $ (>*>) (left 90)
+            $ (>*>) (left (pi/2))
             $ (>*>) pendown (forward 100.0)
 
 

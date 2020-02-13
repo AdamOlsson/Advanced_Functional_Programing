@@ -274,18 +274,12 @@ runProgram (Times n p) (w, (st:sts), t, l) = case n <= 0 of
                                            (w, [st], t, l)
 runProgram  Die (w, (st:sts), t, l)           = runTextual Die st st >>
                                           return (w, [st], True, l)
+                                          
 runProgram (Limited   n p) (w, (st:sts), t, l) = case n < 1 of 
   True -> return (w, [st], t, 0)
   _    -> runTextual (Limited n p) st st >>
           runProgram p (w, [st], t, n)
 
-
-runProgram (Parallel p p') (w, (st:sts), t, l) = 
-  case p of
-    Seq p1 p2 -> undefined
-    _         -> do 
-      runProgram p (w, (st:sts), t, l)
-      runProgram
       
 
 

@@ -158,18 +158,20 @@ green = HGL.Green
 -- -- | Print the textual interface. 
 runTextual :: Program -> TurtleState -> TurtleState -> IO ()
 runTextual (Forward   d) st st' = 
-  putStrLn $ "Turtle took " ++ show d ++ " steps forward" ++
+  putStrLn $ "Turtle " ++ show id ++ " took " ++ show d ++ " steps forward" ++
   " from " ++ showP a ++ " to " ++ showP b ++ "."
   where
     a = getPos st
     b = getPos st'
+    id = getId st
 
 runTextual (Backward   d) st st' = 
-  putStrLn $ "Turtle took " ++ show d ++ " steps backward" ++
+  putStrLn $ "Turtle " ++ show id ++ " took " ++ show d ++ " steps backward" ++
   " from " ++ showP a ++ " to " ++ showP b ++ "."
   where
     a = getPos st
     b = getPos st'
+    id = getId st
 
 runTextual (Right   d) st st' = 
   putStrLn $ "Turtle rotate " ++ show (abs d) ++ " degree/s left" ++
@@ -191,22 +193,22 @@ runTextual (Color   _) st st' =
   where
     a = getColor st
     b = getColor st'
--- runTextual (Times n p)    _ _ = putStrLn $ "Running program " ++ show n ++
---                                             " times."
+runTextual (Times n p)    _ _ = putStrLn $ "Running program " ++ show n ++
+                                            " times."
 runTextual TogglePen st st' = putStrLn $ "Turtle toggled drawing from " ++
                                           show (getDrawing st) ++ " to " ++
                                           show (getDrawing st')
 
--- runTextual (Forever p)    _ _ = putStrLn $ "Turtle runs the program forever."
+runTextual (Forever p)    _ _ = putStrLn $ "Turtle runs the program forever."
 runTextual Idle           _ _ = putStrLn $ "Turtle is idle..."
 runTextual Die            _ _ = putStrLn $ "Turtle dies :'("
--- runTextual (Lifespan  n p) _ _ = putStrLn $ "Runs the program for " ++
---                                             show n ++ " timeunits then dies."
--- runTextual (Limited n p) _ _ = putStrLn $ "Runs the program for " ++
---                                             show n ++ " more timeunits " ++
---                                             "then continues."
--- runTextual (Counter n p) _ _ = putStrLn $ "Runs for " ++ show n ++ 
---                                           " more timesteps."
+runTextual (Lifespan  n p) _ _ = putStrLn $ "Runs the program for " ++
+                                            show n ++ " timeunits then dies."
+runTextual (Limited n p) _ _ = putStrLn $ "Runs the program for " ++
+                                            show n ++ " more timeunits " ++
+                                            "then continues."
+runTextual (Counter n p) _ _ = putStrLn $ "Runs for " ++ show n ++ 
+                                          " more timesteps."
 
 {- | A program consist of a drawing window, turtle state and a 
 bool keeping track of early termination-}
@@ -264,30 +266,49 @@ draw w st st'=  case getDrawing st of
       (x, y)    = getPos st  
       (x', y')  = getPos st' 
 
+printDebug :: Turtle -> IO()
+printDebug t = putStrLn $ show p
+  where 
+    p = getTime t
 
 runProgram :: TurtleProgram -> IO TurtleProgram
 runProgram (w, [])      = return (w, [])
 runProgram (w, (t:ts))  = case program of
   Seq p1 p2 -> case (getTerminal t, (getTime t) < 1) of
-    (True, _) -> return (w, ts)
+    (True, _) -> runProgram (w, ts)
     (_, True) -> do
       let t1 = updateTurtleWithProgram t p1
-      (w1, (t2:ts1)) <- runProgram (w, (t1:ts)) -- can i assume runProgram (w, [t1])?
+      (w1, (t2:ts1)) <- runProgram (w, ([t1]))
       let t3 = updateTurtleWithProgram t2 p2
-      runProgram (w1, ts1 ++ [t3])
+      runProgram (w1, ts ++ [t3])
+
     _         -> do
       let t1 = updateTurtleWithProgram t p1
       (w1, (t2:ts1)) <- runProgram (w, (t1:ts))
-      let t3 = updateTurtleWithProgram t2 p2
+      let t3 = updateTurtleWithProgram t2 (Counter ((getTime t2)-1) p2)
       let t4 = decrementTurtleTimer t3
       runProgram (w1, ts1 ++ [t4])
 
+  Counter n p -> do
+    case n < 1 of 
+      True -> return (w, (t:ts))
+      _    -> do
+        runTextual (Counter n p) st st
+        let t1 = updateTurtleWithProgram t p
+        runProgram (w, t1:ts)
+        where
+          st = getTurtleState t
+
   Parallel p p' -> do
-    runParallel (w, (t1:t2:ts))
+    runParallel (w, (t1:t3:ts))
     runProgram (w, []) -- Assume no Seq after parallel. (Which state should continue?)
     where
       t1 = updateTurtleWithProgram t p
-      t2 = updateTurtleWithProgram t p' -- TODO Increase turtle it
+      t2 = updateTurtleWithProgram t p' -- TODO Increase turtle id
+      st = getTurtleState t2
+      id = getNextId (t:ts) 0
+      st' = setId st id
+      t3 = updateTurtleWithState t2 st'
 
   Forward d -> do
     runTextual program st st'
@@ -365,35 +386,40 @@ runProgram (w, (t:ts))  = case program of
   Times n p -> case n <= 0 of
     True  -> return (w, ts)
     _     -> do
-      -- textual
+      runTextual program st st
       runProgram (w, t1:ts)
       where
         t1 = updateTurtleWithProgram t ((>*>) p $ Times (n-1) p)
+        st = getTurtleState t
   
   Forever p -> do
-    -- textual
+    runTextual program st st
     runProgram (w, t1:ts)
     where
       t1 = updateTurtleWithProgram t ((>*>) p $ Forever p)
+      st = getTurtleState t
 
   Limited n p -> case n < 1 of
     True  -> return (w, ts)
     _     -> do
-      -- textual
-      runProgram (w, t1:ts)
+      runTextual program st st
+      runProgram (w, t2:ts)
       where
         t1 = setTurtleTimer t n
+        t2 = updateTurtleWithProgram t1 p
+        st = getTurtleState t
 
   Lifespan n p -> case n < 1 of
     True  -> return (w, ts)
     _     -> do
-      -- textual
+      runTextual program st st
       runProgram (w, t2:ts)
       runProgram (w, t3:ts)
       where
         t1 = updateTurtleWithProgram t p
         t2 = setTurtleTimer t1 n
         t3 = updateTurtleWithProgram t2 Die -- state does not matter
+        st = getTurtleState t
 
   where
     program = getProgram t
@@ -407,12 +433,10 @@ runParallel (w, ts) = do
 
 
 
--- runProgram (Counter   n p) (w, (st:sts), t, l) = case n < 1 of 
---   True -> return (w, [st], t, 0)
---   _    -> runTextual (Counter n p) st st >>
---           runProgram p (w, [st], t, n)
-
-
-
-
-
+getNextId :: [Turtle] -> Int -> Int
+getNextId [] max_id     = max_id+1
+getNextId (t:ts) max_id = getNextId ts next
+  where
+    st = getTurtleState t
+    id = getId st
+    next = if id > max_id then id else max_id

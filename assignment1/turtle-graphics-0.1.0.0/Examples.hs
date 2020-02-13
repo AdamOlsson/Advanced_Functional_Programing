@@ -3,6 +3,11 @@ module Examples where
 
 import Turtle2
 
+spiral :: Double -> Double -> Program
+spiral size angle 
+  | size > 100 = die
+  | otherwise  = (>*>) (forward size) $
+                 (>*>) (right angle) (spiral (size+2) angle)
 
 example1 :: Program
 example1 = (>*>) (forward 100.0) 
@@ -50,3 +55,33 @@ example6 =    (>*>) (lifespan 4 forward3)
 
 main :: Program
 main = example5
+
+
+forward6 :: Program
+forward6 = (>*>) forward3 forward3
+
+forward12 :: Program
+forward12 = (>*>) forward6 forward6
+
+blueSquare :: Program
+blueSquare =    (>*>) (color blue)
+        $   (>*>) forward3
+        $   (>*>) (left (pi/2))
+        $   (>*>) forward3
+        $   (>*>) (left (pi/2))
+        $   (>*>) forward3
+        $   (>*>) (left (pi/2)) forward3
+
+redSquare :: Program
+redSquare =    (>*>) (color red)
+        $   (>*>) forward3
+        $   (>*>) (right (pi/2))
+        $   (>*>) forward3
+        $   (>*>) die
+        $   (>*>) (right (pi/2))
+        $   (>*>) forward3
+        $   (>*>) (right (pi/2)) forward3
+
+parSquare :: Program
+parSquare = (<|>) redSquare blueSquare 
+

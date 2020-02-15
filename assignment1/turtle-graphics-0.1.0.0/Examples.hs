@@ -83,5 +83,19 @@ redSquare =    (>*>) (color red)
         $   (>*>) (right (pi/2)) forward3
 
 parSquare :: Program
-parSquare = (<|>) redSquare blueSquare 
+parSquare = (<|>) blueSquare redSquare 
 
+parForward :: Program
+parForward = (<|>) forward3 forward3
+
+turnAndForward :: Double -> Program
+turnAndForward d = (>*>) (right d) (forward 100)
+
+parTestRight :: Program
+parTestRight = (<|>) (turnAndForward (pi/4)) $  (<|>) (turnAndForward (pi/2)) (turnAndForward pi)
+
+parTestLeft :: Program
+parTestLeft = (<|>) ((<|>) (turnAndForward (pi/4)) (turnAndForward (pi/2))) (turnAndForward pi)
+
+parForever :: Program
+parForever = (>*>) (forever blueSquare) redSquare

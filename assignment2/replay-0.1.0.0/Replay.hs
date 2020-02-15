@@ -65,7 +65,13 @@ run (Bind replay f)  tr = do
     
 run (Return a)  tr = return $ Right a
 
-run (IO action) (t:trs) = undefined
+
+run (IO action) tr = case tr of
+  ((Result str):tr) -> ??
+  _                 -> do
+    res <- action
+    return $ Left (??, tr ++ [Result res]
+
 
 run (Ask quest) tr = case tr of
   ((Answer a):trs)  -> return $ Right a

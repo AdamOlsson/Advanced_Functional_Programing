@@ -10,6 +10,9 @@ type Angle = Double
 -- | Drawing color, RGB
 type Color = HGL.Color
 
+{- | Turtle state is a position,
+facing angle, color, a boolean keeping
+track if drawing should be done and a turtle id.-}
 data TurtleState = TurtleState {
     pos       :: Point,
     angle     :: Angle,
@@ -18,16 +21,9 @@ data TurtleState = TurtleState {
     tid       :: Int
     }
 
+-- | Show function for point
 showP :: (Double, Double) -> [Char]
 showP (x, y) = "(" ++ show (round(x)) ++ ", " ++ show (round(y)) ++ ")"
-
-showSt :: TurtleState -> IO()
-showSt (TurtleState pos ang c b id) = putStrLn $
-                                    "Pos: " ++ showP pos ++
-                                    ", Angle: " ++ show ang ++
-                                    ", Color: " ++ show c ++
-                                    ", Drawing: " ++ show b ++
-                                    ", id: " ++ show id
 
 newTurtleState :: TurtleState
 newTurtleState = TurtleState {  pos         = (350,300),

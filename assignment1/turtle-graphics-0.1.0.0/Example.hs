@@ -1,13 +1,14 @@
 
-module Examples where
+module Main where
 
-import Turtle2
+import Turtle
 
-spiral :: Double -> Double -> Program
-spiral size angle 
-  | size > 100 = die
-  | otherwise  = (>*>) (forward size) $
-                 (>*>) (right angle) (spiral (size+2) angle)
+main :: IO()
+main = run coolExample
+
+coolExample :: Program
+coolExample = parSquare
+
 
 example1 :: Program
 example1 = (>*>) (forward 100.0) 
@@ -34,10 +35,6 @@ example3 :: Program
 example3 =  (>*>) (times 4 turnRight) (forward 300)
 
 
-spiralForever :: Double -> Double -> Program
-spiralForever size angle =  (>*>) (forward size) $
-                            (>*>) (right angle) (spiralForever (size+2) angle)
-
 example4 :: Program
 example4 = spiralForever 100.0 10.0
 
@@ -52,9 +49,6 @@ example6 :: Program
 example6 =    (>*>) (lifespan 4 forward3)
             $ (>*>) (forward 50) (forward 50)
 
-
-main :: Program
-main = example5
 
 
 forward6 :: Program
@@ -77,7 +71,6 @@ redSquare =    (>*>) (color red)
         $   (>*>) forward3
         $   (>*>) (right (pi/2))
         $   (>*>) forward3
-        $   (>*>) die
         $   (>*>) (right (pi/2))
         $   (>*>) forward3
         $   (>*>) (right (pi/2)) forward3
@@ -98,4 +91,32 @@ parTestLeft :: Program
 parTestLeft = (<|>) ((<|>) (turnAndForward (pi/4)) (turnAndForward (pi/2))) (turnAndForward pi)
 
 parForever :: Program
-parForever = (>*>) (forever blueSquare) redSquare
+parForever = (<|>) (forever blueSquare) redSquare
+
+
+
+-- | Draws a spiral
+spiral :: Double -> Double -> Program
+spiral size angle 
+  | size > 100 = die
+  | otherwise  = (>*>) (forward size) $
+                 (>*>) (right angle) (spiral (size+2) angle)
+
+-- | A spiral that will continue forever
+spiralForever :: Double -> Double -> Program
+spiralForever size angle =  (>*>) (forward size) $
+                            (>*>) (right angle) (spiralForever (size+2) angle)
+
+{-| Q. Can you define a limited version in terms of the unlimited one?
+Yes, but I am assuming that the time 100 is somewhat equivalent
+to the 'size > 100' in the original implementation.
+-}
+spiral' :: Double -> Double -> Program
+spiral' size angle = limited 100 $ spiralForever size angle
+
+-- | A spiral that starts finite and becomes infinite
+spiralFiniteThenInfite :: Double -> Double -> Program
+spiralFiniteThenInfite size angle   
+  | size > 100 = spiralForever size angle
+  | otherwise  = (>*>) (forward size) $
+                 (>*>) (right angle) (spiral (size+2) angle)

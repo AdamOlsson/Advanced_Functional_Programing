@@ -4,34 +4,30 @@
 name:                turtle-graphics
 version:             0.1.0.0
 synopsis:            A graphics library based on artistic turtles
--- description:         
+description:         A Turtle Graphics library implemented using a deep embedding.
 license:             BSD3
 license-file:        LICENSE
--- author:              
--- maintainer:          
--- copyright:           
+author:              Adam Olsson
+maintainer:          Adam Olsson
+copyright:           Yes
 category:            Graphics
 build-type:          Simple
 cabal-version:       >=1.8
 
 library
   exposed-modules:     
-    TurtleGraphics
-    , Turtle
-  other-modules:
-    TurtleState
-    , Turtle
-    , Turtle2
-
+    Turtle
+    , TurtleState
+    , Example
          
   build-depends:       base >= 4 && < 5,
                        HGL
-					   -- Add anything your package depends on here
                        
-  
  
 executable coolturtle
-  hs-source-dirs:      executable
-  build-depends:       base >= 4 && < 5
-                       , turtle-graphics
-  main-is: Example.hs
+  build-depends:       base >= 4 && < 5,
+                       HGL
+  main-is:             Example.hs
+  other-modules:
+                      Turtle
+                      , TurtleState
